@@ -16,10 +16,16 @@ import 'screens/rapports_screen.dart';
 import 'screens/utilisateurs_screen.dart';
 import 'screens/questionnaire_detail_screen.dart';
 import 'screens/decision_detail_screen.dart';
+import 'screens/accueil_public_screen.dart';
+import 'screens/import_excel_screen.dart';
+import 'screens/mistral_test_screen.dart';
 
 class RoutesApp {
-  static const String connexion = '/';
+  static const String accueilPublic = '/accueil';
+  static const String connexion = '/connexion';
   static const String tableauBord = '/tableau';
+  static const String decisions = '/decisions';
+  static const String questionnaires = '/questionnaires';
   static const String tableauBordEleve = '/tableau/eleve';
   static const String tableauBordEnseignant = '/tableau/enseignant';
   static const String tableauBordEtablissement = '/tableau/etablissement';
@@ -27,14 +33,14 @@ class RoutesApp {
   static const String tableauBordMinistere = '/tableau/ministere';
   static const String tableauBordVisiteur = '/tableau/visiteur';
   static const String tableauBordAdmin = '/tableau/admin';
-  static const String decisions = '/decisions';
-  static const String questionnaires = '/questionnaires';
   static const String etablissements = '/etablissements';
   static const String reponses = '/reponses';
   static const String rapports = '/rapports';
   static const String utilisateurs = '/utilisateurs';
   static const String questionnaireDetail = '/questionnaire/detail';
   static const String decisionDetail = '/decision/detail';
+  static const String importExcel = '/import-excel';
+  static const String mistralTest = '/mistral-test';
 
   static String tableauBordParRole(String role) {
     switch (role) {
@@ -53,13 +59,16 @@ class RoutesApp {
       case 'ADMINISTRATEUR':
         return tableauBordAdmin;
       default:
-        return tableauBord;
+        return connexion;
     }
   }
 
   static Map<String, WidgetBuilder> routes(BuildContext context) => {
+        accueilPublic: (_) => const AccueilPublicScreen(),
         connexion: (_) => const ConnexionScreen(),
         tableauBord: (_) => const TableauBordScreen(),
+        decisions: (_) => const DecisionsScreen(),
+        questionnaires: (_) => const QuestionnairesScreen(),
         tableauBordEleve: (_) => const DashboardEleve(),
         tableauBordEnseignant: (_) => const DashboardEnseignant(),
         tableauBordEtablissement: (_) => const DashboardEtablissement(),
@@ -67,13 +76,13 @@ class RoutesApp {
         tableauBordMinistere: (_) => const DashboardMinistere(),
         tableauBordVisiteur: (_) => const DashboardVisiteur(),
         tableauBordAdmin: (_) => const DashboardAdmin(),
-        decisions: (_) => const DecisionsScreen(),
-        questionnaires: (_) => const QuestionnairesScreen(),
         etablissements: (_) => const EtablissementsScreen(),
         reponses: (_) => const ReponsesScreen(),
         rapports: (_) => const RapportsScreen(),
         utilisateurs: (_) => const UtilisateursScreen(),
         questionnaireDetail: (_) => const QuestionnaireDetailScreen(),
         decisionDetail: (_) => const DecisionDetailScreen(),
+        importExcel: (_) => const ImportExcelScreen(),
+        mistralTest: (_) => const MistralTestScreen(),
       };
 }

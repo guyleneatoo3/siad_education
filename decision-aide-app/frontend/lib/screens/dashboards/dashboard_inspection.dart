@@ -29,7 +29,8 @@ class _DashboardInspectionState extends State<DashboardInspection> {
         actions: [
           IconButton(
             icon: const Icon(Icons.person),
-            onPressed: () => Navigator.pushNamed(context, RoutesApp.utilisateurs),
+            onPressed: () =>
+                Navigator.pushNamed(context, RoutesApp.utilisateurs),
           ),
         ],
       ),
@@ -58,7 +59,8 @@ class _DashboardInspectionState extends State<DashboardInspection> {
                         CircleAvatar(
                           radius: 30,
                           backgroundColor: Colors.teal[600],
-                          child: const Icon(Icons.verified_user, size: 30, color: Colors.white),
+                          child: const Icon(Icons.verified_user,
+                              size: 30, color: Colors.white),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
@@ -112,13 +114,15 @@ class _DashboardInspectionState extends State<DashboardInspection> {
                       'Valider établissements',
                       Icons.verified_user,
                       Colors.green,
-                      () => Navigator.pushNamed(context, RoutesApp.etablissements),
+                      () => Navigator.pushNamed(
+                          context, RoutesApp.etablissements),
                     ),
                     _buildActionCard(
                       'Questionnaires',
                       Icons.assignment,
                       Colors.blue,
-                      () => Navigator.pushNamed(context, RoutesApp.questionnaires),
+                      () => Navigator.pushNamed(
+                          context, RoutesApp.questionnaires),
                     ),
                     _buildActionCard(
                       'Rapports d\'analyse',
@@ -139,10 +143,17 @@ class _DashboardInspectionState extends State<DashboardInspection> {
                       () => Navigator.pushNamed(context, RoutesApp.reponses),
                     ),
                     _buildActionCard(
+                      'Test Mistral',
+                      Icons.psychology,
+                      Colors.purple,
+                      () => Navigator.pushNamed(context, RoutesApp.mistralTest),
+                    ),
+                    _buildActionCard(
                       'Mon profil',
                       Icons.person,
-                      Colors.purple,
-                      () => Navigator.pushNamed(context, RoutesApp.utilisateurs),
+                      Colors.grey,
+                      () =>
+                          Navigator.pushNamed(context, RoutesApp.utilisateurs),
                     ),
                   ],
                 ),
@@ -210,7 +221,8 @@ class _DashboardInspectionState extends State<DashboardInspection> {
     );
   }
 
-  Widget _buildActionCard(String title, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildActionCard(
+      String title, IconData icon, Color color, VoidCallback onTap) {
     return Card(
       elevation: 3,
       child: InkWell(
@@ -242,7 +254,8 @@ class _DashboardInspectionState extends State<DashboardInspection> {
     );
   }
 
-  Widget _buildStatCard(String title, String value, IconData icon, Color color) {
+  Widget _buildStatCard(
+      String title, String value, IconData icon, Color color) {
     return Card(
       elevation: 2,
       child: Padding(

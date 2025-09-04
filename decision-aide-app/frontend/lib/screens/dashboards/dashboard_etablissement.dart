@@ -29,7 +29,8 @@ class _DashboardEtablissementState extends State<DashboardEtablissement> {
         actions: [
           IconButton(
             icon: const Icon(Icons.person),
-            onPressed: () => Navigator.pushNamed(context, RoutesApp.utilisateurs),
+            onPressed: () =>
+                Navigator.pushNamed(context, RoutesApp.utilisateurs),
           ),
         ],
       ),
@@ -42,7 +43,8 @@ class _DashboardEtablissementState extends State<DashboardEtablissement> {
 
           final profil = snap.data;
           final nomComplet = profil?['nomComplet'] ?? 'Établissement';
-          final etablissementNom = profil?['etablissementNom'] ?? 'Établissement';
+          final etablissementNom =
+              profil?['etablissementNom'] ?? 'Établissement';
 
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
@@ -59,7 +61,8 @@ class _DashboardEtablissementState extends State<DashboardEtablissement> {
                         CircleAvatar(
                           radius: 30,
                           backgroundColor: Colors.blue[600],
-                          child: const Icon(Icons.school, size: 30, color: Colors.white),
+                          child: const Icon(Icons.school,
+                              size: 30, color: Colors.white),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
@@ -110,20 +113,17 @@ class _DashboardEtablissementState extends State<DashboardEtablissement> {
                   childAspectRatio: 1.2,
                   children: [
                     _buildActionCard(
-                      'Gérer utilisateurs',
-                      Icons.group,
+                      'Import Excel',
+                      Icons.file_upload,
                       Colors.green,
-                      () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Fonctionnalité à venir')),
-                        );
-                      },
+                      () => Navigator.pushNamed(context, RoutesApp.importExcel),
                     ),
                     _buildActionCard(
                       'Questionnaires',
                       Icons.assignment,
                       Colors.blue,
-                      () => Navigator.pushNamed(context, RoutesApp.questionnaires),
+                      () => Navigator.pushNamed(
+                          context, RoutesApp.questionnaires),
                     ),
                     _buildActionCard(
                       'Décisions publiées',
@@ -135,7 +135,8 @@ class _DashboardEtablissementState extends State<DashboardEtablissement> {
                       'Mon profil',
                       Icons.person,
                       Colors.purple,
-                      () => Navigator.pushNamed(context, RoutesApp.utilisateurs),
+                      () =>
+                          Navigator.pushNamed(context, RoutesApp.utilisateurs),
                     ),
                   ],
                 ),
@@ -181,7 +182,8 @@ class _DashboardEtablissementState extends State<DashboardEtablissement> {
     );
   }
 
-  Widget _buildActionCard(String title, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildActionCard(
+      String title, IconData icon, Color color, VoidCallback onTap) {
     return Card(
       elevation: 3,
       child: InkWell(
@@ -213,7 +215,8 @@ class _DashboardEtablissementState extends State<DashboardEtablissement> {
     );
   }
 
-  Widget _buildStatCard(String title, String value, IconData icon, Color color) {
+  Widget _buildStatCard(
+      String title, String value, IconData icon, Color color) {
     return Card(
       elevation: 2,
       child: Padding(

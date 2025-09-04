@@ -15,7 +15,7 @@ class MonApp extends StatelessWidget {
       title: 'SIAD Décision',
       theme: themeClair(),
       routes: RoutesApp.routes(context),
-      initialRoute: RoutesApp.connexion,
+      initialRoute: RoutesApp.accueilPublic,
     );
   }
 }
