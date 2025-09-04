@@ -1,0 +1,113 @@
+{
+   "checksum": "d7985f6f98793b32606029bb6440810d",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "children": [  ],
+            "date_added": "13376517964890738",
+            "date_last_used": "0",
+            "date_modified": "13376517964890738",
+            "guid": "6e70116e-3c73-4c55-80f4-8234516ecd72",
+            "id": "7",
+            "name": "Volet des favoris",
+            "source": "unknown",
+            "type": "folder"
+         }, {
+            "date_added": "13376082505015048",
+            "date_last_used": "0",
+            "guid": "a9f074e8-a3da-4bad-a17d-ae2dce162274",
+            "id": "8",
+            "name": "Bing",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "http://go.microsoft.com/fwlink/p/?LinkId=255142",
+            "visit_count": 0
+         }, {
+            "children": [ {
+               "children": [  ],
+               "date_added": "13376517964895353",
+               "date_last_used": "0",
+               "date_modified": "13376517964895353",
+               "guid": "d052ae96-4163-4611-a10e-b5c43817cb51",
+               "id": "10",
+               "name": "Volet des favoris",
+               "source": "unknown",
+               "type": "folder"
+            }, {
+               "children": [  ],
+               "date_added": "13376517964895359",
+               "date_last_used": "0",
+               "date_modified": "13376517964895359",
+               "guid": "e5c2a7a7-7587-4932-8e75-6ee9cd3c7b07",
+               "id": "11",
+               "name": "Volet des favoris (2)",
+               "source": "unknown",
+               "type": "folder"
+            }, {
+               "date_added": "13376312002177839",
+               "date_last_used": "0",
+               "guid": "baa7a823-1ec8-40e5-b5b4-a7050ba88abc",
+               "id": "12",
+               "name": "Bing",
+               "show_icon": false,
+               "source": "sync",
+               "type": "url",
+               "url": "http://go.microsoft.com/fwlink/p/?LinkId=255142",
+               "visit_count": 0
+            } ],
+            "date_added": "13376517964895346",
+            "date_last_used": "0",
+            "date_modified": "13376517964895346",
+            "guid": "4490cf37-aaca-4246-9a1a-e6e3f210e4c6",
+            "id": "9",
+            "name": "Importé à partir de Internet Explorer",
+            "source": "unknown",
+            "type": "folder"
+         } ],
+         "date_added": "13401386766028328",
+         "date_last_used": "0",
+         "date_modified": "13376082505015048",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Barre des favoris",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "other": {
+         "children": [ {
+            "date_added": "13364218971617231",
+            "date_last_used": "0",
+            "guid": "841dc5bd-8d1f-44d3-94ef-f73a191a104c",
+            "id": "6",
+            "name": "Télécharger pour Mac OS",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://nicepage.com/download-mac",
+            "visit_count": 0
+         } ],
+         "date_added": "13401386766028328",
+         "date_last_used": "0",
+         "date_modified": "13364218971617231",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Autres favoris",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13401386766028328",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Favoris de l’appareil mobile",
+         "source": "unknown",
+         "type": "folder"
+      }
+   },
+   "sync_metadata": "CjEKDgiIgQISCOMd0A+ZAQAAEgAqGEp4TjNRQmNrQTFoNHdISlhiR2pCbkE9PUgDoAYHEq0BCAwSqAEKHHREYkFBUEhYa09zelIxOWNkYzRzU05xVkczWT0SJGJhYTdhODIzLTFlYzgtNDBlNS1iNWI0LWE3MDUwYmE4OGFiYxgAIAAoADDCm9K3uzI4yaTSt7syQMmk0re7MkocL3RuUDVUQkg4TEtYSXZsbWh3UldVM2c0VlJRPVofIh3Zb25HUXpXRGo2ZlV0T2dwNzRGR0lzeEljblRBPWUAAAAAwj4CYAUSrQEICxKoAQocK1VjYk8zR3RiRkhTVnF4VUdvdGo4bnNzcG9FPRIkZTVjMmE3YTctNzU4Ny00OTMyLThlNzUtNmVlOWNkM2M3YjA3GAAgACgAMMGb0re7MjimpNK3uzJApqTSt7syShxFaDJ0UXk0Tld3ZWFPNTY0Q2ViYThJb2RlY0k9Wh8iHbJMNHp6WmM4SHBNNCtsUG9pSFdrVHhZQ016ZTA9ZQAAAADCPgJgABKtAQgIEqgBChwwVDdocnV3TWoyN2VZYk5MM09VcjdCc0J1Njg9EiRhOWYwNzRlOC1hM2RhLTRiYWQtYTE3ZC1hZTJkY2UxNjIyNzQYACAAKAAww5vSt7syOOqk0re7MkDqpNK3uzJKHHUweDlDQWJ1QXRMaFQydE9OL2dTcEovL25NND1aHyIdvFM1TnVhOFNkSnVSblpKOEtuZlI1dHhxK3JWOD1lAAAAAMI+AmAFEo4BCAESiQEKHHl4Si82ZnZrZWNyN2twNUVRekI0dFdMcGRiRT0SJGE5N2NlMzk1LTYwNjgtNWNiOS1hMGI2LWJiNDU4ODIyMDZkNxgAIAAoADCHm+ejvjE446Dno74xQOOg56O+MUocYVJDV0xnaEY5YjVJbnFLSUR2dUovanZRa0ZjPVoAZQAAAADCPgJgABKsAQgKEqcBChxqUGt5MUFhOW51VExLd1Y2SnJQNE1iK0VkVjg9EiRkMDUyYWU5Ni00MTYzLTQ2MTEtYTEwZS1iNWM0MzgxN2NiNTEYACAAKAAwwJvSt7syOIWk0re7MkCFpNK3uzJKHGVrZnh0T2ltb3Nqam1XR3lZWXVmbk1YaFVsOD1aHiIcZTA2S3h0NEhIcjBzS25scjNOYy83b2hCR2ljPWUAAAAAwj4CYAASrAEIBhKnAQocZ25oeGcvbVV2YzFDYnFmL1dMSWkvZTJDUzZ3PRIkODQxZGM1YmQtOGQxZi00NGQzLTk0ZWYtZjczYTE5MWExMDRjGAAgACgAMPDN0re7MjiC09K3uzJAgtPSt7syShxTamhiWXlPZUtZbWk1Qjh5aGVlZnA5azRUdXc9Wh4iHFdkV3FYQ0k2OGh5WW5LWjRtelNVaVdlbGR0MD1leieYnsI+AmAFEq0BCAkSqAEKHDNqcWkyN3F0cmZiQi95d1BQVGxFQ2JrRDl6UT0SJDQ0OTBjZjM3LWFhY2EtNDI0Ni05YTFhLWU2ZTNmMjEwZTRjNhgAIAAoADC/m9K3uzI44aPSt7syQOGj0re7Mkocb1ZIZCsvTkR3dDdRNUZKSVgzQUI0bHZ2OVJJPVofIh3eTkl6L2trWnZGaTZlRy9jbUlUMDUrRWdmRTBRPWUAAAAAwj4CYAASjgEIAhKJAQocWWNTVG9udkVTUHdxQ3M0TDJjclZodjY4TDk4PRIkYWZjNzE0ZjMtMmVmNS01ZWVmLTg0ZDctYmExMTAzYTkyZGFkGAAgACgAMIib56O+MTj6oOejvjFA+qDno74xShxvUFZraHdCUmJWNjVLQ1dSMitJT05IV29PdTg9WgBlAAAAAMI+AmAAEqwBCAcSpwEKHEJtV3J5M0ZKVXNvMHcyVGtlRXFJeUVEY1RLMD0SJDZlNzAxMTZlLTNjNzMtNGM1NS04MGY0LTgyMzQ1MTZlY2Q3MhgAIAAoADC+m9K3uzI4wKPSt7syQMCj0re7MkocMnl0Q1RpaVFFaFFWdkVoeG1ybzd3cURwRTIwPVoeIhx5TGVOVTN0a3dwSjVOejF6MDZXWkg4b1dwbDg9ZQAAAADCPgJgABKOAQgDEokBChxuamdEdTg4ZUNydlhwODZwRDdmSEdjcUZwODg9EiRkYTAyMjNiNi05NmI1LTUwYWUtYjY2ZS05Y2VjNDEzZTM2MWIYACAAKAAwjZvno74xOLmh56O+MUC5oeejvjFKHHl6TkIwMWNuNTRBN2NSVTB1VCsvUGdtVHRVbz1aAGUAAAAAwj4CYAAwADgA",
+   "version": 1
+}
