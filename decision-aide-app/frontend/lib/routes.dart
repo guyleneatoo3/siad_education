@@ -19,6 +19,7 @@ import 'screens/decision_detail_screen.dart';
 import 'screens/accueil_public_screen.dart';
 import 'screens/import_excel_screen.dart';
 import 'screens/mistral_test_screen.dart';
+import 'screens/inscription_etablissement.dart';
 
 class RoutesApp {
   static const String accueilPublic = '/accueil';
@@ -41,6 +42,7 @@ class RoutesApp {
   static const String decisionDetail = '/decision/detail';
   static const String importExcel = '/import-excel';
   static const String mistralTest = '/mistral-test';
+  static const String inscriptionEtablissement = '/inscription-etablissement';
 
   static String tableauBordParRole(String role) {
     switch (role) {
@@ -84,5 +86,6 @@ class RoutesApp {
         decisionDetail: (_) => const DecisionDetailScreen(),
         importExcel: (_) => const ImportExcelScreen(),
         mistralTest: (_) => const MistralTestScreen(),
+        inscriptionEtablissement: (_) => const InscriptionEtablissementPage(),
       };
 }

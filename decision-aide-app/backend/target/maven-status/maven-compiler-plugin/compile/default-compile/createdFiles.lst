@@ -24,6 +24,7 @@ sn\siad\controller\ControleurEtablissement.class
 sn\siad\model\Questionnaire.class
 sn\siad\repository\DepotDecision.class
 sn\siad\service\ServiceQuestionnaire.class
+sn\siad\service\ServiceEtablissement.class
 sn\siad\service\ServiceUtilisateur.class
 sn\siad\model\RapportAnalyse.class
 sn\siad\service\ServiceImportExcel$1.class

@@ -17,7 +17,8 @@ class UtilisateurModele {
     this.etablissementNom,
   });
 
-  factory UtilisateurModele.fromJson(Map<String, dynamic> json) => UtilisateurModele(
+  factory UtilisateurModele.fromJson(Map<String, dynamic> json) =>
+      UtilisateurModele(
         id: json['id'] as int,
         nomComplet: json['nomComplet'] as String? ?? '',
         email: json['email'] as String?,
@@ -26,4 +27,15 @@ class UtilisateurModele {
         actif: json['actif'] as bool? ?? false,
         etablissementNom: json['etablissement']?['nom'] as String?,
       );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'nomComplet': nomComplet,
+        if (email != null) 'email': email,
+        if (matricule != null) 'matricule': matricule,
+        'role': role,
+        'actif': actif,
+        if (etablissementNom != null)
+          'etablissement': {'nom': etablissementNom},
+      };
 }

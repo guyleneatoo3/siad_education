@@ -5,6 +5,31 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
+  Future<http.Response> put(String chemin, Map<String, dynamic> data) async {
+    final jeton = await lireJeton();
+    final url = Uri.parse('$baseUrl$chemin');
+    return http.put(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        if (jeton != null && jeton.isNotEmpty) 'Authorization': 'Bearer $jeton',
+      },
+      body: jsonEncode(data),
+    );
+  }
+
+  Future<http.Response> delete(String chemin) async {
+    final jeton = await lireJeton();
+    final url = Uri.parse('$baseUrl$chemin');
+    return http.delete(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        if (jeton != null && jeton.isNotEmpty) 'Authorization': 'Bearer $jeton',
+      },
+    );
+  }
+
   static const String baseUrl = 'http://localhost:8080';
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
   static const String _tokenKey = 'jeton';
@@ -28,7 +53,8 @@ class ApiService {
   }
 
   Future<Map<String, dynamic>?> profilActuel() async {
-    final res = await get('/api/utilisateurs/me');
+    // Utilise le nouvel endpoint qui retourne etablissementId
+    final res = await get('/api/utilisateurs/profil');
     if (res.statusCode == 200) {
       return jsonDecode(res.body) as Map<String, dynamic>;
     }

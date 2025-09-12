@@ -99,6 +99,14 @@ class _AccueilPublicScreenState extends State<AccueilPublicScreen> {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
+              TextButton(
+                onPressed: () => Navigator.pushNamed(
+                    context, RoutesApp.inscriptionEtablissement),
+                child: const Text(
+                  "Inscription",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ],
           ),
 

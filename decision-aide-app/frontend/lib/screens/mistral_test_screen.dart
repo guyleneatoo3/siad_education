@@ -1,3 +1,5 @@
+import 'package:decision_aide_frontend/modeles/questionnaire.dart';
+import 'package:decision_aide_frontend/services/questionnaire_service.dart';
 import 'package:flutter/material.dart';
 import '../services/mistral_service.dart';
 import '../utils/mistral_test.dart';
@@ -10,6 +12,9 @@ class MistralTestScreen extends StatefulWidget {
 }
 
 class _MistralTestScreenState extends State<MistralTestScreen> {
+  final TextEditingController _titreController = TextEditingController();
+  final TextEditingController _utilisateurIdController =
+      TextEditingController();
   final TextEditingController _nombreController = TextEditingController();
   final TextEditingController _typeController = TextEditingController();
   final TextEditingController _niveauController = TextEditingController();
@@ -32,6 +37,8 @@ class _MistralTestScreenState extends State<MistralTestScreen> {
     _niveauController.text = 'Seconde';
     _matiereController.text = 'Mathématiques';
     _destinataireController.text = 'eleve';
+    _titreController.text = 'Questionnaire généré';
+    _utilisateurIdController.text = '1';
   }
 
   @override
@@ -44,7 +51,72 @@ class _MistralTestScreenState extends State<MistralTestScreen> {
     _avisController.dispose();
     _contexteController.dispose();
     _destinataireController.dispose();
+    _titreController.dispose();
+    _utilisateurIdController.dispose();
     super.dispose();
+  }
+
+  Future<void> _enregistrerQuestionnaire() async {
+    setState(() {
+      _isLoading = true;
+      _error = null;
+    });
+    try {
+      // On suppose que la génération de questions a déjà été faite et stockée dans _resultat
+      if (_resultat == null) {
+        setState(() {
+          _isLoading = false;
+          _error = 'Veuillez d’abord générer les questions.';
+        });
+        return;
+      }
+      // Récupérer l'utilisateur courant via le service (profilActuel)
+      final utilisateur = await QuestionnaireService().profilActuel();
+      final questionnaire = QuestionnaireModele(
+        id: 0,
+        titre: _titreController.text,
+        contenuJson: _resultat!,
+        creePar: utilisateur,
+      );
+      await QuestionnaireService().creer(questionnaire);
+      setState(() {
+        _isLoading = false;
+        _resultat = 'Questionnaire enregistré avec succès !';
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+        _error = 'Erreur lors de l’enregistrement : $e';
+      });
+    }
+  }
+
+  Future<void> _partagerQuestionnaire() async {
+    setState(() {
+      _isLoading = true;
+      _resultat = null;
+      _error = null;
+    });
+    try {
+      // On suppose que la génération de questions a déjà été faite et stockée dans _resultat
+      if (_resultat == null) {
+        setState(() {
+          _isLoading = false;
+          _error = 'Veuillez d’abord générer les questions.';
+        });
+        return;
+      }
+      // TODO: implémenter la logique d’envoi/partage selon le destinataire (enseignant/élève)
+      setState(() {
+        _isLoading = false;
+        _resultat = 'Questionnaire partagé avec succès !';
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+        _error = 'Erreur lors du partage : $e';
+      });
+    }
   }
 
   @override
@@ -60,6 +132,24 @@ class _MistralTestScreenState extends State<MistralTestScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Champs supplémentaires pour titre et utilisateur
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextField(
+                      controller: _titreController,
+                      decoration: const InputDecoration(
+                        labelText: 'Titre du questionnaire',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             // Sélection de fonction
             Card(
               child: Padding(
@@ -177,8 +267,39 @@ class _MistralTestScreenState extends State<MistralTestScreen> {
                     ),
                   ),
                 ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _isLoading ? null : _enregistrerQuestionnaire,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green[700],
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child: const Text(
+                      'Enregistrer',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _isLoading ? null : _partagerQuestionnaire,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue[700],
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child: const Text(
+                      'Partager',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ),
               ],
             ),
+
             const SizedBox(height: 16),
 
             // Affichage du résultat

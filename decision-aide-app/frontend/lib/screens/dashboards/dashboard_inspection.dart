@@ -32,6 +32,14 @@ class _DashboardInspectionState extends State<DashboardInspection> {
             onPressed: () =>
                 Navigator.pushNamed(context, RoutesApp.utilisateurs),
           ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            tooltip: 'Déconnexion',
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, RoutesApp.connexion, (route) => false);
+            },
+          ),
         ],
       ),
       body: FutureBuilder<Map<String, dynamic>?>(

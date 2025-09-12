@@ -47,6 +47,26 @@ public class ControleurUtilisateur {
         depotUtilisateur.save(u);
         return ResponseEntity.ok(Map.of("message", "Mot de passe modifié"));
     }
+
+    @GetMapping("/profil")
+    public ResponseEntity<?> profilActuel(Authentication authentication) {
+        String identifiant = authentication.getName();
+        Utilisateur u = depotUtilisateur.findByEmail(identifiant)
+                .orElseGet(() -> depotUtilisateur.findByMatricule(identifiant).orElse(null));
+        if (u == null) return ResponseEntity.badRequest().body(Map.of("message", "Utilisateur introuvable"));
+        // Construction du profil enrichi
+        Map<String, Object> profil = new java.util.HashMap<>();
+        profil.put("id", u.getId());
+        profil.put("nomComplet", u.getNomComplet());
+        profil.put("email", u.getEmail());
+        profil.put("role", u.getRole() != null ? u.getRole().name() : null);
+        profil.put("actif", u.isActif());
+        if (u.getEtablissement() != null) {
+            profil.put("etablissementId", u.getEtablissement().getId());
+            profil.put("etablissementNom", u.getEtablissement().getNom());
+        }
+        return ResponseEntity.ok(profil);
+    }
 }
 
 

@@ -9,6 +9,9 @@ void main() {
 class MonApp extends StatelessWidget {
   const MonApp({super.key});
 
+  // Pour activer/désactiver la bande debug, modifiez cette valeur :
+  static const bool showDebugBanner = false;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,6 +19,7 @@ class MonApp extends StatelessWidget {
       theme: themeClair(),
       routes: RoutesApp.routes(context),
       initialRoute: RoutesApp.accueilPublic,
+      debugShowCheckedModeBanner: showDebugBanner,
     );
   }
 }

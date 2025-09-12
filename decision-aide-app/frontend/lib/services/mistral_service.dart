@@ -332,17 +332,17 @@ Génère $nombre questions de type "$type"$niveauText$matiereText$destinataireTe
 CONTEXTE: Questionnaire destiné aux ÉLÈVES du système éducatif Camerounais du secondaire.
 
 Les questions doivent être :
-- Adaptées au niveau scolaire des élèves
-- Claires et compréhensibles pour des étudiants
-- Variées en difficulté (facile, moyen, difficile)
-- Pertinentes pour évaluer les connaissances et compétences
-- Formulées de manière simple et directe
-- Adaptées au contexte culturel Camerounais du secondaire
+- Axées sur les pratiques pédagogiques et méthodologiques
+- Évaluant les compétences d'enseignement et d'évaluation appliquer sur le cour choisi pour l elève
+- Pertinentes pour améliorer les méthodes d'enseignement
+- Formulées de manière professionnelle
+- Adaptées au contexte éducatif Camerounais du secondaire
 
-EXEMPLES DE QUESTIONS ÉLÈVES:
-- "Quelle est la capitale du Sénégal ?"
-- "Calculez l'aire d'un rectangle de 5cm par 3cm"
-- "Expliquez en vos propres mots ce qu'est la photosynthèse"
+EXEMPLES DE QUESTIONS ELEVES:
+- "Pensez vous que votre professeur de mathematiques utilisent une bonne methode ?"
+- "Utilisez vous le materiel adequat lorsque vous effectuer le cours ?"
+- "Décrivez le niveau de satisfaction de votre cour"
+_"la methodologie d'enseignement vous permet_il de comprendre facilement les cours ?"
 
 Réponds en JSON avec cette structure :
 {

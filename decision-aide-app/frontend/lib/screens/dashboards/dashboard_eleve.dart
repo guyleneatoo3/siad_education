@@ -29,7 +29,16 @@ class _DashboardEleveState extends State<DashboardEleve> {
         actions: [
           IconButton(
             icon: const Icon(Icons.person),
-            onPressed: () => Navigator.pushNamed(context, RoutesApp.utilisateurs),
+            onPressed: () =>
+                Navigator.pushNamed(context, RoutesApp.utilisateurs),
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            tooltip: 'Déconnexion',
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, RoutesApp.connexion, (route) => false);
+            },
           ),
         ],
       ),
@@ -58,7 +67,8 @@ class _DashboardEleveState extends State<DashboardEleve> {
                         CircleAvatar(
                           radius: 30,
                           backgroundColor: Colors.green[600],
-                          child: const Icon(Icons.school, size: 30, color: Colors.white),
+                          child: const Icon(Icons.school,
+                              size: 30, color: Colors.white),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
@@ -112,7 +122,8 @@ class _DashboardEleveState extends State<DashboardEleve> {
                       'Questionnaires à remplir',
                       Icons.assignment,
                       Colors.blue,
-                      () => Navigator.pushNamed(context, RoutesApp.questionnaires),
+                      () => Navigator.pushNamed(
+                          context, RoutesApp.questionnaires),
                     ),
                     _buildActionCard(
                       'Décisions publiées',
@@ -130,7 +141,8 @@ class _DashboardEleveState extends State<DashboardEleve> {
                       'Mon profil',
                       Icons.person,
                       Colors.purple,
-                      () => Navigator.pushNamed(context, RoutesApp.utilisateurs),
+                      () =>
+                          Navigator.pushNamed(context, RoutesApp.utilisateurs),
                     ),
                   ],
                 ),
@@ -176,7 +188,8 @@ class _DashboardEleveState extends State<DashboardEleve> {
     );
   }
 
-  Widget _buildActionCard(String title, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildActionCard(
+      String title, IconData icon, Color color, VoidCallback onTap) {
     return Card(
       elevation: 3,
       child: InkWell(
@@ -208,7 +221,8 @@ class _DashboardEleveState extends State<DashboardEleve> {
     );
   }
 
-  Widget _buildStatCard(String title, String value, IconData icon, Color color) {
+  Widget _buildStatCard(
+      String title, String value, IconData icon, Color color) {
     return Card(
       elevation: 2,
       child: Padding(
