@@ -2,6 +2,7 @@ package sn.siad.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.web.bind.annotation.*;
 import sn.siad.model.Etablissement;
 import sn.siad.repository.DepotEtablissement;
@@ -39,19 +40,26 @@ public class ControleurEtablissement {
         return service.lister();
     }
 
-    @PatchMapping("/{id}/activation")
+    @PostMapping("/{id}/activation")
     @PreAuthorize("hasRole('INSPECTION')")
-    public ResponseEntity<Etablissement> activer(@PathVariable Long id, @RequestParam boolean actif) {
+    public ResponseEntity<Etablissement> activer(@PathVariable Long id, @RequestBody Map<String, Object> body) {
+       
+        boolean actif = Boolean.TRUE.equals(body.get("actif"));
+        System.out.println("Activation request body: " + actif);
         Optional<Etablissement> opt = service.trouverParId(id);
+       
         if (opt.isPresent()) {
             Etablissement e = opt.get();
+            Utilisateur user = depotUtilisateur.findByEmail(e.getEmail()).get();
             e.setActif(actif);
+            user.setActif(actif);
+            
             service.enregistrer(e);
+            depotUtilisateur.save(user);
             return ResponseEntity.ok(e);
         }
         return ResponseEntity.notFound().build();
     }
-
     // Lister les élèves d'un établissement
     @GetMapping("/{etabId}/eleves")
     @PreAuthorize("hasAnyRole('ETABLISSEMENT','INSPECTION','ADMINISTRATEUR')")
@@ -143,7 +151,9 @@ public class ControleurEtablissement {
         gest.setEtablissement(etab);
         gest.setActif(false); // Doit être activé par l'inspection
         depotUtilisateur.save(gest);
+
         return ResponseEntity.status(201).body(Map.of("message", "Inscription enregistrée. En attente de validation par l'inspection."));
+   
     }
 }
 

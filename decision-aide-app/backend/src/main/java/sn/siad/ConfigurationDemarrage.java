@@ -24,7 +24,9 @@ public class ConfigurationDemarrage {
                 etab.setRegion("Dakar");
                 etab.setActif(true);
                 etab = depotEtablissement.save(etab);
+                
 
+                
                 Utilisateur admin = new Utilisateur();
                 admin.setNomComplet("Admin Système");
                 admin.setEmail("admin@gmail.com");
@@ -36,7 +38,7 @@ public class ConfigurationDemarrage {
                 Utilisateur insp = new Utilisateur();
                 insp.setNomComplet("Inspecteur Académique");
                 insp.setEmail("inspection@gmail.com");
-                insp.setMotDePasse(encoder.encode("inspect123"));
+                    insp.setMotDePasse(encoder.encode("")); // Suppression de la ligne invalide
                 insp.setRole(RoleUtilisateur.INSPECTION);
                 insp.setActif(true);
                 depotUtilisateur.save(insp);

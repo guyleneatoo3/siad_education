@@ -33,8 +33,11 @@ public class ControleurAuth {
 
     @PostMapping("/connexion")
     public ResponseEntity<?> connexion(@RequestBody DemandeConnexion demande) {
+        System.out.println("dans le controleur"+demande);
         Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(demande.identifiant(), demande.motDePasse()));
+        System.out.println("dans le controleur 1"+auth );
         UserDetails user = (UserDetails) auth.getPrincipal();
+        System.out.println("dans le controleur 2"+user);
         String token = jwtUtil.genererToken(user.getUsername());
         return ResponseEntity.ok(Map.of("jeton", token, "utilisateur", user.getUsername()));
     }

@@ -10,11 +10,12 @@ import sn.siad.model.Utilisateur;
 import sn.siad.repository.DepotUtilisateur;
 
 import java.util.Map;
+import java.util.Optional; // Import nécessaire
 
 @RestController
 @RequestMapping("/api/utilisateurs")
 @Validated
-public class ControleurUtilisateur {
+public class ControleurUtilisateur { // Début de la classe
 
     private final DepotUtilisateur depotUtilisateur;
     private final PasswordEncoder passwordEncoder;
@@ -23,6 +24,39 @@ public class ControleurUtilisateur {
         this.depotUtilisateur = depotUtilisateur;
         this.passwordEncoder = passwordEncoder;
     }
+
+    /**
+     * Correction : Méthode d'ajout déplacée ici.
+     * Cette méthode suppose que le corps de la requête (Utilisateur user) contient
+     * au moins le nomComplet, l'email et le rôle (et potentiellement l'établissementId, 
+     * bien que la gestion de l'établissement soit souvent dans un autre service).
+     *
+     * Remarque : Le mot de passe par défaut est renvoyé dans le corps de la réponse.
+     */
+    @PostMapping("/ajouter")
+    public ResponseEntity<?> ajouterUtilisateur(@RequestBody Utilisateur user) {
+        if (user.getEmail() != null && depotUtilisateur.findByEmail(user.getEmail()).isPresent()) {
+            return ResponseEntity.badRequest().body(Map.of("message", "Email déjà utilisé"));
+        }
+        
+        // Sécurité : Le mot de passe par défaut ne doit jamais être stocké en clair.
+        final String defaultPassword = "changeme"; 
+        
+        // Mot de passe par défaut encodé
+        user.setMotDePasse(passwordEncoder.encode(defaultPassword));
+        user.setActif(true); 
+
+        depotUtilisateur.save(user);
+
+        // Réponse avec le mot de passe par défaut (peut être un risque de sécurité, 
+        // à utiliser uniquement si c'est la politique de l'application).
+        return ResponseEntity.ok(Map.of("message", "Utilisateur créé avec mot de passe par défaut", 
+                                       "motDePasseInitial", defaultPassword)); 
+    }
+
+    // -------------------------------------------------------------------------
+    // Reste des méthodes existantes
+    // -------------------------------------------------------------------------
 
     @GetMapping("/me")
     public ResponseEntity<?> moi(Authentication authentication) {
@@ -54,6 +88,7 @@ public class ControleurUtilisateur {
         Utilisateur u = depotUtilisateur.findByEmail(identifiant)
                 .orElseGet(() -> depotUtilisateur.findByMatricule(identifiant).orElse(null));
         if (u == null) return ResponseEntity.badRequest().body(Map.of("message", "Utilisateur introuvable"));
+        
         // Construction du profil enrichi
         Map<String, Object> profil = new java.util.HashMap<>();
         profil.put("id", u.getId());
@@ -67,6 +102,10 @@ public class ControleurUtilisateur {
         }
         return ResponseEntity.ok(profil);
     }
-}
 
-
+    @GetMapping("/email-existe")
+    public Map<String, Object> emailExiste(@RequestParam String email) {
+        boolean existe = depotUtilisateur.findByEmail(email).isPresent();
+        return Map.of("existe", existe);
+    }
+} 

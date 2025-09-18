@@ -98,45 +98,67 @@ class EtablissementService {
     return res.statusCode == 200;
   }
 
-  // Inscription d'un établissement (à adapter selon l'API backend)
-  /// Retourne true si succès, sinon lève une exception avec le message d'erreur du backend si disponible
-  Future<bool> inscrireEtablissement(
-      EtablissementModele etab, String motDePasse) async {
-    // Appel direct sans jeton pour l'inscription publique
-    final url =
-        Uri.parse('${ApiService.baseUrl}/api/etablissements/inscription');
-    final res = await http.post(
-      url,
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        ...etab.toJson(),
-        'motDePasse': motDePasse,
-      }),
-    );
-    if (res.statusCode == 201 || res.statusCode == 200) {
-      return true;
-    } else {
-      try {
-        final body = res.body;
-        String msg = 'Erreur inconnue (${res.statusCode})';
-        if (body.isNotEmpty) {
-          try {
-            final decoded = body.startsWith('{') ? jsonDecode(body) : null;
-            if (decoded != null &&
-                decoded is Map &&
-                decoded.containsKey('message')) {
-              msg = decoded['message'].toString();
-            } else {
-              msg = body;
-            }
-          } catch (_) {
+// Vérifie si un email existe déjà
+// (méthode déplacée ou renommée pour éviter la duplication)
+
+  // Inscription d'un établissement avec vérification de l'existence de l'email
+Future<bool> inscrireEtablissement(
+    EtablissementModele etab, String motDePasse) async {
+  // Vérification de l'existence de l'email
+  final bool existe = await emailExiste(etab.email);
+  if (existe) {
+    throw Exception("Un établissement avec cet email existe déjà.");
+  }       
+
+  // Appel direct sans jeton pour l'inscription publique
+  final url =
+      Uri.parse('${ApiService.baseUrl}/api/etablissements/inscription');
+  final res = await http.post(
+    url,
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode({
+      ...etab.toJson(),
+      'motDePasse': motDePasse,
+    }),
+  );
+
+  if (res.statusCode == 201 || res.statusCode == 200) {
+    return true;
+  } else {
+    try {
+      final body = res.body;
+      String msg = 'Erreur inconnue (${res.statusCode})';
+      if (body.isNotEmpty) {
+        try {
+          final decoded = body.startsWith('{') ? jsonDecode(body) : null;
+          if (decoded != null &&
+              decoded is Map &&
+              decoded.containsKey('message')) {
+            msg = decoded['message'].toString();
+          } else {
             msg = body;
           }
+        } catch (_) {
+          msg = body;
         }
-        throw Exception(msg);
-      } catch (e) {
-        throw Exception(e.toString());
       }
+      throw Exception(msg);
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
+}
+
+// Nouvelle méthode : vérifier si un email existe déjà
+Future<bool> emailExiste(String email) async {
+  final url = Uri.parse('${ApiService.baseUrl}/api/utilisateurs/email-existe?email=$email');
+  final res = await http.get(url);
+
+  if (res.statusCode == 200) {
+    final body = jsonDecode(res.body);
+    return body['existe'] == true;
+  } else {
+    throw Exception("Erreur lors de la vérification de l'email (${res.statusCode})");
+  }
+}
 }

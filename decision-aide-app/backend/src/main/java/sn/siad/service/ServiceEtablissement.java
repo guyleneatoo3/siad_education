@@ -6,6 +6,7 @@ import sn.siad.model.Etablissement;
 import sn.siad.model.Utilisateur;
 import sn.siad.repository.DepotEtablissement;
 import sn.siad.repository.DepotUtilisateur;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,9 @@ public class ServiceEtablissement {
     private DepotEtablissement depotEtablissement;
     @Autowired
     private DepotUtilisateur depotUtilisateur;
+
+     @Autowired
+     PasswordEncoder encoder;
 
     public List<Etablissement> lister() {
         return depotEtablissement.findAll();
@@ -47,16 +51,18 @@ public class ServiceEtablissement {
     public List<Utilisateur> listerEnseignants(Long etabId) {
     return depotUtilisateur.findByEtablissementIdAndRole(etabId, sn.siad.model.RoleUtilisateur.ENSEIGNANT);
     }
-
+//service ajouter un eleve
     public Utilisateur ajouterEleve(Long etabId, Utilisateur eleve) {
     eleve.setRole(sn.siad.model.RoleUtilisateur.ELEVE);
         eleve.setEtablissement(depotEtablissement.findById(etabId).orElse(null));
+        eleve.setMotDePasse(encoder.encode("ELEVE"+eleve.getMatricule()));
         return depotUtilisateur.save(eleve);
     }
 
     public Utilisateur ajouterEnseignant(Long etabId, Utilisateur enseignant) {
     enseignant.setRole(sn.siad.model.RoleUtilisateur.ENSEIGNANT);
         enseignant.setEtablissement(depotEtablissement.findById(etabId).orElse(null));
+        enseignant.setMotDePasse(encoder.encode("ENSEIGNANT"+enseignant.getMatricule()));
         return depotUtilisateur.save(enseignant);
     }
 

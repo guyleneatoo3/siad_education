@@ -72,6 +72,7 @@ class ApiService {
       body: jsonEncode({'identifiant': identifiant, 'motDePasse': motDePasse}),
     );
     if (res.statusCode == 200) {
+      print("utilisateut existant ");
       final body = jsonDecode(res.body) as Map<String, dynamic>;
       final jeton = body['jeton'] as String?;
       if (jeton != null && jeton.isNotEmpty) {
@@ -79,6 +80,7 @@ class ApiService {
       }
       return body;
     }
+    print("utilisateut inexistant ");
     return null;
   }
 
