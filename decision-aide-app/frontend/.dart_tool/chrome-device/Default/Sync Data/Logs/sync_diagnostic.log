@@ -455,3 +455,120 @@
 2025-09-18 16:27:31.435: [WARN][Sync] NetworkError: Network error (ERR_CONNECTION_RESET)
 2025-09-18 16:32:32.365: [INFO][Sync] Reset engine, reason: 0
 2025-09-18 16:32:32.365: [INFO][Sync] Reset engine with reason: 0
+2025-09-18 21:32:50.665: [INFO][Sync] SyncState after authenticated was: FeatureCanStart
+2025-09-18 21:33:03.811: [INFO][Sync] Try to start sync engine
+2025-09-18 21:33:03.912: [INFO][SyncAuthManager::SetLastAuthError] Current auth error: None
+2025-09-18 21:33:03.912: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: None for account type: MSA
+2025-09-18 21:33:03.912: [INFO][Sync] Credentials changed for: EdgeSyncScopeNew
+2025-09-18 21:33:04.292: [INFO][SyncManagerImpl::NudgeForInitialDownload] Initial download nudge for Encryption Keys
+2025-09-18 21:33:04.292: [INFO][SyncEngineBackend::LoadAndConnectNigoriController] Load and connect Nigori controller
+2025-09-18 21:33:04.292: [INFO][SyncEngineBackend::DoInitialize] Control Types added: Encryption Keys
+2025-09-18 21:33:04.292: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download: Encryption Keys with reason: 3
+2025-09-18 21:33:04.292: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Configure job was blocked
+2025-09-18 21:33:25.304: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:33:25.304: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:33:25.305: [INFO][SyncEngineBackend::DoUpdateCredentials] Update credentials
+2025-09-18 21:33:25.305: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:33:25.310: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:33:25.310: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:33:25.315: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:33:27.817: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:33:27.822: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:33:27.822: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:33:27.826: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:33:34.095: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:33:34.097: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:33:34.097: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:33:34.102: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:33:49.723: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:33:49.726: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:33:49.726: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:33:49.730: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:33:55.317: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:33:55.317: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:34:13.167: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:34:13.169: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:34:13.169: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:34:13.174: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:34:27.014: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:34:27.014: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:34:48.341: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:34:48.343: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:34:48.343: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:34:48.348: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:35:00.854: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:35:00.854: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:35:38.609: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:35:38.609: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:36:16.239: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:36:16.241: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:36:16.241: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:36:16.246: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:36:21.685: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:36:21.685: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:37:20.779: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:37:20.779: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:38:28.083: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:38:28.088: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:38:28.089: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:38:28.100: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:38:44.999: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:38:44.999: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:41:15.442: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:41:15.442: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:41:45.970: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:41:45.977: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:41:45.977: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:41:45.981: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:45:19.644: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:45:19.644: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:48:00.893: [INFO][Sync] SyncState after authenticated was: FeatureCanStart
+2025-09-18 21:48:11.063: [INFO][Sync] Try to start sync engine
+2025-09-18 21:48:11.067: [INFO][SyncManagerImpl::NudgeForInitialDownload] Initial download nudge for Encryption Keys
+2025-09-18 21:48:11.067: [INFO][SyncEngineBackend::LoadAndConnectNigoriController] Load and connect Nigori controller
+2025-09-18 21:48:11.067: [INFO][SyncEngineBackend::DoInitialize] Control Types added: Encryption Keys
+2025-09-18 21:48:11.067: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download: Encryption Keys with reason: 3
+2025-09-18 21:48:11.067: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Configure job was blocked
+2025-09-18 21:48:11.126: [INFO][SyncAuthManager::SetLastAuthError] Current auth error: None
+2025-09-18 21:48:11.126: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: None for account type: MSA
+2025-09-18 21:48:11.126: [INFO][Sync] Credentials changed for: EdgeSyncScopeNew
+2025-09-18 21:48:31.232: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:48:31.232: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:48:31.232: [INFO][SyncEngineBackend::DoUpdateCredentials] Update credentials
+2025-09-18 21:48:31.232: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:48:31.236: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:31.236: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:31.240: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:32.749: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:48:32.753: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:32.753: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:32.757: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:36.504: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:48:36.506: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:36.506: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:36.510: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:42.138: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:48:42.142: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:42.142: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:42.153: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:50.586: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:48:50.590: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:50.591: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:48:50.601: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:49:01.238: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:49:01.238: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:49:11.691: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:49:11.696: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:49:11.696: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:49:11.707: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:49:33.227: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:49:33.227: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:50:04.444: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-18 21:50:04.449: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:50:04.449: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:50:04.460: [WARN][Sync] NetworkError: Network error (ERR_INTERNET_DISCONNECTED)
+2025-09-18 21:50:06.727: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:50:06.727: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:50:43.964: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-18 21:50:43.964: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-18 21:50:46.797: [INFO][Sync] Reset engine, reason: 0

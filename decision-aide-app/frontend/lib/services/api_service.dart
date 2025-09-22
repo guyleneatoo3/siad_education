@@ -108,4 +108,17 @@ class ApiService {
       body: jsonEncode(data),
     );
   }
+
+  Future<http.Response> patch(String chemin, Map<String, dynamic> data) async {
+    final jeton = await lireJeton();
+    final url = Uri.parse('$baseUrl$chemin');
+    return http.patch(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+        if (jeton != null && jeton.isNotEmpty) 'Authorization': 'Bearer $jeton',
+      },
+      body: jsonEncode(data),
+    );
+  }
 }

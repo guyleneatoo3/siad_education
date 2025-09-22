@@ -16,13 +16,21 @@ public class Questionnaire {
     private Long id;
 
     private String titre;
+
     @Column(columnDefinition = "TEXT")
     private String contenuJson; // JSON des questions générées
+
+    // Ajout destinataire : ENSEIGNANT ou ELEVE
+    private String destinataire;
 
     @ManyToOne
     private Utilisateur creePar; // inspection
 
     private Instant creeLe = Instant.now();
+
+    private boolean partage = false;
+
+    private Instant dateFinPartage;
 }
 
 

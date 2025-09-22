@@ -1,6 +1,7 @@
 import 'package:decision_aide_frontend/modeles/questionnaire.dart';
 import 'package:decision_aide_frontend/services/questionnaire_service.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../services/mistral_service.dart';
 import '../utils/mistral_test.dart';
 
@@ -72,11 +73,19 @@ class _MistralTestScreenState extends State<MistralTestScreen> {
       }
       // Récupérer l'utilisateur courant via le service (profilActuel)
       final utilisateur = await QuestionnaireService().profilActuel();
+      // Récupérer le choix destinataire (ENSEIGNANT ou ELEVE)
+      String destinataire = '';
+      if (_destinataireController.text.trim().toLowerCase() == 'enseignant') {
+        destinataire = 'ENSEIGNANT';
+      } else {
+        destinataire = 'ELEVE';
+      }
       final questionnaire = QuestionnaireModele(
         id: 0,
         titre: _titreController.text,
         contenuJson: _resultat!,
         creePar: utilisateur,
+        destinataire: destinataire,
       );
       await QuestionnaireService().creer(questionnaire);
       setState(() {
@@ -92,13 +101,74 @@ class _MistralTestScreenState extends State<MistralTestScreen> {
   }
 
   Future<void> _partagerQuestionnaire() async {
+    DateTime? dateFinPartage = await showDialog<DateTime>(
+      context: context,
+      builder: (BuildContext context) {
+        DateTime? selectedDate;
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: const Text('Partager le questionnaire'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('Sélectionnez la date de fin de partage :'),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () async {
+                      final now = DateTime.now();
+                      final picked = await showDatePicker(
+                        context: context,
+                        initialDate: now,
+                        firstDate: now,
+                        lastDate: DateTime(now.year + 2),
+                      );
+                      if (picked != null) {
+                        setState(() {
+                          selectedDate = picked;
+                        });
+                      }
+                    },
+                    child: const Text('Choisir la date'),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(selectedDate != null
+                      ? 'Date sélectionnée : ${selectedDate!.toLocal().toString().split(' ')[0]}'
+                      : 'Aucune date sélectionnée'),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Annuler'),
+                ),
+                ElevatedButton(
+                  onPressed: selectedDate != null
+                      ? () {
+                          Navigator.of(context).pop(selectedDate);
+                        }
+                      : null,
+                  child: const Text('Valider'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+
+    if (dateFinPartage == null) {
+      // Annulé ou aucune date sélectionnée
+      return;
+    }
+
     setState(() {
       _isLoading = true;
-      _resultat = null;
       _error = null;
     });
     try {
-      // On suppose que la génération de questions a déjà été faite et stockée dans _resultat
       if (_resultat == null) {
         setState(() {
           _isLoading = false;
@@ -106,10 +176,22 @@ class _MistralTestScreenState extends State<MistralTestScreen> {
         });
         return;
       }
-      // TODO: implémenter la logique d’envoi/partage selon le destinataire (enseignant/élève)
+      // Ici, il faut récupérer l'ID du questionnaire à partager
+      // Remplacez 0 par l'ID réel du questionnaire enregistré
+      // À remplacer par l'ID réel
+      final prefs = await SharedPreferences.getInstance();
+      int? questionnaireId = prefs.getInt('id_question');
+      print("id questionnaire :" + questionnaireId.toString());
+      print("date :" + dateFinPartage.timeZoneName);
+      final res = await QuestionnaireService()
+          .partager(questionnaireId!, dateFinPartage);
       setState(() {
         _isLoading = false;
-        _resultat = 'Questionnaire partagé avec succès !';
+        if (res == true) {
+          _resultat = 'Questionnaire partagé avec succès !';
+        } else {
+          _error = 'Erreur lors du partage : ';
+        }
       });
     } catch (e) {
       setState(() {

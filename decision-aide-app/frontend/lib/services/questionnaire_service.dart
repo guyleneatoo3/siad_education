@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'api_service.dart';
 import '../modeles/questionnaire.dart';
 import '../modeles/utilisateur.dart';
@@ -21,6 +22,7 @@ class QuestionnaireService {
     final Map<String, dynamic> data = {
       'titre': questionnaire.titre,
       'contenuJson': questionnaire.contenuJson,
+      'destinataire': questionnaire.destinataire,
       if (utilisateur != null) 'creePar': utilisateur,
     };
     final http.Response res = await _api.post(
@@ -28,7 +30,11 @@ class QuestionnaireService {
       data,
     );
     if (res.statusCode == 201 || res.statusCode == 200) {
-      return QuestionnaireModele.fromJson(jsonDecode(res.body));
+      final q = QuestionnaireModele.fromJson(jsonDecode(res.body));
+      // Stocker l'ID dans SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setInt('id_question', q.id);
+      return q;
     }
     return null;
   }
@@ -62,14 +68,34 @@ class QuestionnaireService {
 
   final ApiService _api = ApiService();
 
-  Future<List<QuestionnaireModele>> lister() async {
+  Future<List<QuestionnaireModele>> listerFiltresParRole() async {
     final http.Response res = await _api.get('/api/questionnaires');
     if (res.statusCode == 200) {
       final List<dynamic> data = jsonDecode(res.body) as List<dynamic>;
+      final utilisateur = await profilActuel();
+      String role = '';
+      if (utilisateur != null && utilisateur.role != null) {
+        role = utilisateur.role.toString().toUpperCase();
+      }
+      // On filtre selon le rôle : si ENSEIGNANT, on ne voit que les questionnaires destinés aux enseignants, etc.
       return data
           .map((e) => QuestionnaireModele.fromJson(e as Map<String, dynamic>))
+          .where((q) => q.destinataire.toUpperCase() == role)
           .toList();
     }
     return [];
+  }
+
+  /// Partage un questionnaire (met à jour les champs partage et dateFinPartage)
+  Future<bool> partager(int id, DateTime dateFinPartage) async {
+    final http.Response res = await _api.patch(
+      '/api/questionnaires/$id/partage',
+      {
+        'partage': true,
+        'dateFinPartage': dateFinPartage.toIso8601String(),
+      },
+    );
+    print("partage reponse: ${res.statusCode}");
+    return res.statusCode == 200;
   }
 }
