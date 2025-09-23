@@ -10,17 +10,25 @@ class ReponseService {
     final http.Response res = await _api.get('/api/reponses');
     if (res.statusCode == 200) {
       final List<dynamic> data = jsonDecode(res.body) as List<dynamic>;
+      
       return data
-          .map((e) => ReponseQuestionnaireModele.fromJson(e as Map<String, dynamic>))
+          .map((e) =>
+              ReponseQuestionnaireModele.fromJson(e as Map<String, dynamic>))
           .toList();
     }
+    print('Erreur lors de la récupération des réponses: ${res.statusCode}');
     return [];
   }
 
   Future<bool> enregistrer(ReponseQuestionnaireModele reponse) async {
     final http.Response res = await _api.post('/api/reponses', {
+      'id': reponse.id,
       'questionnaireId': reponse.questionnaireId,
       'reponsesJson': reponse.reponsesJson,
+      if (reponse.utilisateurNom != null)
+        'utilisateurNom': reponse.utilisateurNom,
+      if (reponse.dateSoumission != null)
+        'dateSoumission': reponse.dateSoumission!.toIso8601String(),
     });
     return res.statusCode == 200;
   }

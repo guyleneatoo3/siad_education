@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/questionnaire_service.dart';
 import '../modeles/questionnaire.dart';
+import 'quiz_form_screen.dart';
 
 class QuestionnairesScreen extends StatefulWidget {
   const QuestionnairesScreen({super.key});
@@ -16,7 +17,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   @override
   void initState() {
     super.initState();
-    _future = _service.lister();
+    _future = _service.listerFiltresParRole();
   }
 
   @override
@@ -40,8 +41,16 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
               final q = items[i];
               return ListTile(
                 title: Text(q.titre),
-                subtitle: Text(q.contenuJson,
+                subtitle: Text(q.dateFinPartage.toString(),
                     maxLines: 2, overflow: TextOverflow.ellipsis),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => QuizFormScreen(questionnaire: q),
+                    ),
+                  );
+                },
               );
             },
           );

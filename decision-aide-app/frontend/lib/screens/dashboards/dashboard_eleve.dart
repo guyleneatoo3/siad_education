@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../routes.dart';
 import '../../services/api_service.dart';
+import '../../services/questionnaire_service.dart';
 
 class DashboardEleve extends StatefulWidget {
   const DashboardEleve({super.key});
@@ -12,11 +13,13 @@ class DashboardEleve extends StatefulWidget {
 class _DashboardEleveState extends State<DashboardEleve> {
   final ApiService _api = ApiService();
   late Future<Map<String, dynamic>?> _profilFuture;
+  Future<bool> _hasNotification = Future.value(false);
 
   @override
   void initState() {
     super.initState();
     _profilFuture = _api.profilActuel();
+    _hasNotification = _checkNotification();
   }
 
   @override
@@ -27,6 +30,35 @@ class _DashboardEleveState extends State<DashboardEleve> {
         backgroundColor: Colors.green[700],
         foregroundColor: Colors.white,
         actions: [
+          FutureBuilder<bool>(
+            future: _hasNotification,
+            builder: (context, snap) {
+              if (snap.connectionState != ConnectionState.done) {
+                return const SizedBox.shrink();
+              }
+              if (snap.data == true) {
+                return IconButton(
+                  icon:
+                      const Icon(Icons.notifications_active, color: Colors.red),
+                  tooltip: 'Nouveau questionnaire disponible',
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text(
+                              'Un nouveau questionnaire est disponible !')),
+                    );
+                    Navigator.pushNamed(context, RoutesApp.questionnaires);
+                  },
+                );
+              } else {
+                return IconButton(
+                  icon: const Icon(Icons.notifications_none),
+                  tooltip: 'Aucune nouvelle notification',
+                  onPressed: () {},
+                );
+              }
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () =>
@@ -186,6 +218,11 @@ class _DashboardEleveState extends State<DashboardEleve> {
         },
       ),
     );
+  }
+
+  Future<bool> _checkNotification() async {
+    final list = await QuestionnaireService().listerFiltresParRole();
+    return list.isNotEmpty;
   }
 
   Widget _buildActionCard(

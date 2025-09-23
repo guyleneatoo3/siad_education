@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+   
+
 @RestController
 @RequestMapping("/api/inspection")
 public class ControleurInspection {
@@ -183,6 +185,41 @@ public class ControleurInspection {
     public ResponseEntity<List<RapportAnalyse>> listerRapports() {
         return ResponseEntity.ok(depotRapport.findAll());
     }
+
+
+     /**
+     * Liste les questionnaires créés par l'inspecteur connecté
+     */
+    @GetMapping("/mes-questionnaires")
+    @PreAuthorize("hasRole('INSPECTION')")
+    public ResponseEntity<List<Questionnaire>> listerQuestionnairesParCreateur(Authentication auth) {
+        String email = auth.getName();
+        Optional<Utilisateur> inspecteur = depotUtilisateur.findByEmail(email);
+        if (inspecteur.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        List<Questionnaire> questionnaires = depotQuestionnaire.findByCreePar(inspecteur.get());
+        return ResponseEntity.ok(questionnaires);
+    }
+
+    /**
+     * Liste les questionnaires créés par l'inspecteur connecté filtrés par destinataire (ELEVE/ENSEIGNANT)
+     */
+    @GetMapping("/mes-questionnaires/{destinataire}")
+    @PreAuthorize("hasRole('INSPECTION')")
+    public ResponseEntity<List<Questionnaire>> listerQuestionnairesParCreateurEtDestinataire(@PathVariable String destinataire, Authentication auth) {
+        String email = auth.getName();
+        Optional<Utilisateur> inspecteur = depotUtilisateur.findByEmail(email);
+        if (inspecteur.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        List<Questionnaire> questionnaires = depotQuestionnaire.findByCreePar(inspecteur.get())
+            .stream()
+            .filter(q -> destinataire.equalsIgnoreCase(q.getDestinataire()))
+            .toList();
+        return ResponseEntity.ok(questionnaires);
+    }
+
 }
 
 

@@ -1,9 +1,17 @@
-2025/09/18-23:33:08.160 2e1c Reusing MANIFEST C:\Users\ngago\AppData\Local\Temp\flutter_tools.250f850f\flutter_tools_chrome_device.22931fdd\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
-2025/09/18-23:33:08.161 2e1c Recovering log #13
-2025/09/18-23:33:08.163 2e1c Reusing old log C:\Users\ngago\AppData\Local\Temp\flutter_tools.250f850f\flutter_tools_chrome_device.22931fdd\Default\EdgeCoupons/coupons_data.db/000013.log 
-2025/09/18-23:33:08.164 2e1c Delete type=0 #4
-2025/09/18-23:33:08.164 2e1c Delete type=0 #7
-2025/09/18-23:33:08.164 2e1c Delete type=0 #10
-2025/09/18-23:34:14.548 3204 Level-0 table #17: started
-2025/09/18-23:34:14.671 3204 Level-0 table #17: 672303 bytes OK
-2025/09/18-23:34:14.776 3204 Delete type=0 #13
+2025/09/23-17:50:16.987 8bc Reusing MANIFEST C:\Users\ngago\AppData\Local\Temp\flutter_tools.b4e9a25d\flutter_tools_chrome_device.700830d1\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2025/09/23-17:50:16.989 8bc Recovering log #26
+2025/09/23-17:50:16.989 8bc Reusing old log C:\Users\ngago\AppData\Local\Temp\flutter_tools.b4e9a25d\flutter_tools_chrome_device.700830d1\Default\EdgeCoupons/coupons_data.db/000026.log 
+2025/09/23-17:50:16.990 8bc Delete type=0 #4
+2025/09/23-17:50:16.990 8bc Delete type=0 #7
+2025/09/23-17:50:16.991 8bc Delete type=2 #8
+2025/09/23-17:50:16.991 8bc Delete type=0 #10
+2025/09/23-17:50:16.991 8bc Delete type=2 #11
+2025/09/23-17:50:16.991 8bc Delete type=0 #13
+2025/09/23-17:50:16.991 8bc Delete type=2 #14
+2025/09/23-17:50:16.991 8bc Delete type=0 #16
+2025/09/23-17:50:17.953 8bc Delete type=2 #17
+2025/09/23-17:50:18.008 8bc Delete type=0 #19
+2025/09/23-17:50:18.303 8bc Delete type=0 #23
+2025/09/23-17:51:26.675 2488 Level-0 table #30: started
+2025/09/23-17:51:26.755 2488 Level-0 table #30: 672352 bytes OK
+2025/09/23-17:51:26.776 2488 Delete type=0 #26

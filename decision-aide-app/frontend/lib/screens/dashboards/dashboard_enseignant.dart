@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../routes.dart';
 import '../../services/api_service.dart';
+import '../../services/questionnaire_service.dart';
+import '../../modeles/questionnaire.dart';
 
 class DashboardEnseignant extends StatefulWidget {
   const DashboardEnseignant({super.key});
@@ -10,13 +12,26 @@ class DashboardEnseignant extends StatefulWidget {
 }
 
 class _DashboardEnseignantState extends State<DashboardEnseignant> {
+  // ...existing code...
+  // Vérifie s'il y a un questionnaire à remplir pour l'enseignant
+  Future<QuestionnaireModele?> _checkNotification() async {
+    final list = await QuestionnaireService().listerFiltresParRole();
+    if (list.isNotEmpty) {
+      // TODO: filtrer ceux déjà répondus par l'enseignant si besoin
+      return list.first;
+    }
+    return null;
+  }
+
   final ApiService _api = ApiService();
   late Future<Map<String, dynamic>?> _profilFuture;
+  Future<QuestionnaireModele?> _notifQuestionnaireFuture = Future.value(null);
 
   @override
   void initState() {
     super.initState();
     _profilFuture = _api.profilActuel();
+    _notifQuestionnaireFuture = _checkNotification();
   }
 
   @override
@@ -27,6 +42,34 @@ class _DashboardEnseignantState extends State<DashboardEnseignant> {
         backgroundColor: Colors.indigo[700],
         foregroundColor: Colors.white,
         actions: [
+          FutureBuilder<QuestionnaireModele?>(
+            future: _notifQuestionnaireFuture,
+            builder: (context, snap) {
+              if (snap.connectionState != ConnectionState.done) {
+                return const SizedBox.shrink();
+              }
+              final q = snap.data;
+              if (q != null) {
+                return IconButton(
+                  icon:
+                      const Icon(Icons.notifications_active, color: Colors.red),
+                  tooltip: 'Nouveau questionnaire à remplir',
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                          content: Text('Nouveau questionnaire : ${q.titre}')),
+                    );
+                  },
+                );
+              } else {
+                return IconButton(
+                  icon: const Icon(Icons.notifications_none),
+                  tooltip: 'Aucune nouvelle notification',
+                  onPressed: () {},
+                );
+              }
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () =>
@@ -131,8 +174,9 @@ class _DashboardEnseignantState extends State<DashboardEnseignant> {
                       Colors.orange,
                       () => Navigator.pushNamed(context, RoutesApp.decisions),
                     ),
+                    // Affiche les réponses soumises par l'enseignant connecté
                     _buildActionCard(
-                      'Réponses des élèves',
+                      'Mes réponses',
                       Icons.assignment_turned_in,
                       Colors.green,
                       () => Navigator.pushNamed(context, RoutesApp.reponses),

@@ -572,3 +572,313 @@
 2025-09-18 21:50:43.964: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
 2025-09-18 21:50:43.964: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
 2025-09-18 21:50:46.797: [INFO][Sync] Reset engine, reason: 0
+2025-09-23 11:05:43.055: [INFO][Sync] SyncState after authenticated was: FeatureCanStart
+2025-09-23 11:05:54.609: [INFO][Sync] Try to start sync engine
+2025-09-23 11:05:54.811: [INFO][SyncManagerImpl::NudgeForInitialDownload] Initial download nudge for Encryption Keys
+2025-09-23 11:05:54.811: [INFO][SyncEngineBackend::LoadAndConnectNigoriController] Load and connect Nigori controller
+2025-09-23 11:05:54.811: [INFO][SyncEngineBackend::DoInitialize] Control Types added: Encryption Keys
+2025-09-23 11:05:54.811: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download: Encryption Keys with reason: 3
+2025-09-23 11:05:54.853: [INFO][SyncAuthManager::SetLastAuthError] Current auth error: None
+2025-09-23 11:05:54.853: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: None for account type: MSA
+2025-09-23 11:05:54.853: [INFO][Sync] Credentials changed for: EdgeSyncScopeNew
+2025-09-23 11:05:55.042: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Configure job was blocked
+2025-09-23 11:06:04.574: [INFO][SyncAuthManager::SetLastAuthError] Current auth error: None
+2025-09-23 11:06:04.574: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: None for account type: MSA
+2025-09-23 11:06:04.574: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-23 11:06:04.575: [INFO][SyncEngineBackend::DoUpdateKeyDataCredentials] Update key data credentials
+2025-09-23 11:06:04.575: [INFO][SyncEngineBackend::DoUpdateCredentials] Update credentials
+2025-09-23 11:06:04.665: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-23 11:06:10.740: [INFO][Sync] Started DataTypeManager configuration, reason: 4
+2025-09-23 11:06:10.740: [INFO][Sync] Configuring for: Bookmarks, Preferences, Passwords, Autofill Profiles, Autofill, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys, reason: 4, current state: 0
+2025-09-23 11:06:10.741: [WARN][Sync] Crypto error data types: Passwords, Autofill Profiles, Autofill
+2025-09-23 11:06:10.761: [INFO][Sync] Configure, desired: Bookmarks, Preferences, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys; Allow fail: Passwords, Autofill Profiles, Autofill
+2025-09-23 11:06:10.842: [INFO][Sync] Loading: Bookmarks
+2025-09-23 11:06:10.842: [INFO][Sync] Loading: Preferences
+2025-09-23 11:06:10.842: [INFO][Sync] Loading: Extensions
+2025-09-23 11:06:10.887: [INFO][Sync] Loading: Sessions
+2025-09-23 11:06:10.887: [INFO][Sync] Loading: Extension settings
+2025-09-23 11:06:10.887: [INFO][Sync] Loading: History Delete Directives
+2025-09-23 11:06:10.915: [INFO][Sync] Loading: Device Info
+2025-09-23 11:06:10.915: [INFO][Sync] Loading: User Consents
+2025-09-23 11:06:10.915: [INFO][Sync] Loading: Send Tab To Self
+2025-09-23 11:06:10.915: [INFO][Sync] Loading: Web Apps
+2025-09-23 11:06:10.915: [INFO][Sync] Loading: History
+2025-09-23 11:06:10.915: [INFO][Sync] Loading: Saved Tab Group
+2025-09-23 11:06:10.915: [INFO][Sync] Loading: WebAuthn Credentials
+2025-09-23 11:06:10.915: [INFO][Sync] Loading: Collection
+2025-09-23 11:06:10.915: [INFO][Sync] Loading: Edge E Drop
+2025-09-23 11:06:10.915: [INFO][Sync] Loading: Edge Hub App Usage
+2025-09-23 11:06:10.915: [INFO][Sync] Loading: Edge Wallet
+2025-09-23 11:06:11.009: [INFO][Sync] All data types are ready for configure.
+2025-09-23 11:06:24.847: [INFO][Sync] Started DataTypeManager configuration, reason: 5
+2025-09-23 11:06:24.847: [INFO][Sync] Configuring for: Bookmarks, Preferences, Passwords, Autofill Profiles, Autofill, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys, reason: 5, current state: 1
+2025-09-23 11:06:24.848: [INFO][SyncEngineBackend::DoStartConfiguration] Start configuration
+2025-09-23 11:06:24.848: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 4
+2025-09-23 11:06:24.848: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:06:24.851: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 4
+2025-09-23 11:06:24.851: [WARN][Sync]     Reconfigure requested while configuration ongoing.
+2025-09-23 11:06:24.851: [INFO][Sync] Configuring for: Bookmarks, Preferences, Passwords, Autofill Profiles, Autofill, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys, reason: 5, current state: 2
+2025-09-23 11:06:24.851: [INFO][Sync] Configure, desired: Bookmarks, Preferences, Passwords, Autofill Profiles, Autofill, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys; Allow fail: 
+2025-09-23 11:06:24.852: [INFO][Sync] Loading: Passwords
+2025-09-23 11:06:24.852: [INFO][Sync] Loading: Autofill Profiles
+2025-09-23 11:06:24.852: [INFO][Sync] Loading: Autofill
+2025-09-23 11:06:24.852: [INFO][Sync] All data types are ready for configure.
+2025-09-23 11:06:24.852: [INFO][SyncManagerImpl::NudgeForInitialDownload] Initial download nudge for Passwords
+2025-09-23 11:06:24.852: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 5
+2025-09-23 11:06:24.852: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:06:24.852: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 4
+2025-09-23 11:06:24.852: [INFO][Sync] Prepare to configure types: Passwords, Encryption Keys
+2025-09-23 11:06:24.856: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download: Passwords, Encryption Keys with reason: 5
+2025-09-23 11:06:24.856: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Passwords, Encryption Keys
+2025-09-23 11:06:33.327: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: Passwords, Encryption Keys
+2025-09-23 11:06:33.338: [INFO][Sync] ConfigurationDone, failed: , succeeded: Passwords, Encryption Keys, remaining count: 3
+2025-09-23 11:06:33.338: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 5
+2025-09-23 11:06:33.338: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:06:33.338: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 2
+2025-09-23 11:06:33.340: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 5
+2025-09-23 11:06:33.340: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:06:33.351: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 1
+2025-09-23 11:06:33.358: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 5
+2025-09-23 11:06:33.358: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:06:33.358: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 0
+2025-09-23 11:06:33.365: [INFO][Sync]     Configuration completed, state: 7
+2025-09-23 11:06:33.366: [INFO][Sync] Configured DataTypeManager: Ok
+2025-09-23 11:06:33.374: [INFO][SyncEngineBackend::DoStartSyncing] Start syncing
+2025-09-23 11:07:38.576: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:07:38.581: [WARN][Sync] NetworkError: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:07:38.585: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:08:02.213: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:08:02.219: [WARN][Sync] NetworkError: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:08:02.224: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:08:59.002: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:08:59.003: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:08:59.009: [WARN][Sync] NetworkError: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:10:06.043: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:10:06.044: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:10:06.055: [WARN][Sync] NetworkError: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:14:32.701: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 11:14:32.701: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 11:14:32.706: [WARN][Sync] NetworkError: Network error (ERR_TIMED_OUT)
+2025-09-23 11:19:06.008: [INFO][Sync] SyncState after authenticated was: FeatureCanStart
+2025-09-23 11:19:16.505: [INFO][Sync] Try to start sync engine
+2025-09-23 11:19:16.509: [INFO][SyncManagerImpl::NudgeForInitialDownload] Initial download nudge for Encryption Keys
+2025-09-23 11:19:16.509: [INFO][SyncEngineBackend::LoadAndConnectNigoriController] Load and connect Nigori controller
+2025-09-23 11:19:16.509: [INFO][SyncEngineBackend::DoInitialize] Control Types added: Encryption Keys
+2025-09-23 11:19:16.509: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download: Encryption Keys with reason: 3
+2025-09-23 11:19:16.509: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Configure job was blocked
+2025-09-23 11:19:16.603: [INFO][SyncAuthManager::SetLastAuthError] Current auth error: None
+2025-09-23 11:19:16.603: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: None for account type: MSA
+2025-09-23 11:19:16.603: [INFO][Sync] Credentials changed for: EdgeSyncScopeNew
+2025-09-23 11:19:37.750: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-23 11:19:37.750: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-23 11:19:37.752: [INFO][SyncEngineBackend::DoUpdateCredentials] Update credentials
+2025-09-23 11:19:37.752: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-23 11:19:50.925: [INFO][Sync] Started DataTypeManager configuration, reason: 4
+2025-09-23 11:19:50.925: [INFO][Sync] Configuring for: Bookmarks, Preferences, Passwords, Autofill Profiles, Autofill, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys, reason: 4, current state: 0
+2025-09-23 11:19:50.925: [WARN][Sync] Crypto error data types: Passwords, Autofill Profiles, Autofill
+2025-09-23 11:19:50.925: [INFO][SyncEngineBackend::DoStartConfiguration] Start configuration
+2025-09-23 11:19:50.930: [INFO][Sync] Configure, desired: Bookmarks, Preferences, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys; Allow fail: Passwords, Autofill Profiles, Autofill
+2025-09-23 11:19:50.930: [INFO][Sync] Loading: Bookmarks
+2025-09-23 11:19:50.930: [INFO][Sync] Loading: Preferences
+2025-09-23 11:19:50.930: [INFO][Sync] Loading: Extensions
+2025-09-23 11:19:50.930: [INFO][Sync] Loading: Sessions
+2025-09-23 11:19:50.930: [INFO][Sync] Loading: Extension settings
+2025-09-23 11:19:50.930: [INFO][Sync] Loading: History Delete Directives
+2025-09-23 11:19:50.931: [INFO][Sync] Loading: Device Info
+2025-09-23 11:19:50.931: [INFO][Sync] Loading: User Consents
+2025-09-23 11:19:50.931: [INFO][Sync] Loading: Send Tab To Self
+2025-09-23 11:19:50.931: [INFO][Sync] Loading: Web Apps
+2025-09-23 11:19:50.931: [INFO][Sync] Loading: History
+2025-09-23 11:19:50.931: [INFO][Sync] Loading: Saved Tab Group
+2025-09-23 11:19:50.931: [INFO][Sync] Loading: WebAuthn Credentials
+2025-09-23 11:19:50.931: [INFO][Sync] Loading: Collection
+2025-09-23 11:19:50.931: [INFO][Sync] Loading: Edge E Drop
+2025-09-23 11:19:50.931: [INFO][Sync] Loading: Edge Hub App Usage
+2025-09-23 11:19:50.931: [INFO][Sync] Loading: Edge Wallet
+2025-09-23 11:19:50.947: [INFO][Sync] All data types are ready for configure.
+2025-09-23 11:19:50.948: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 4
+2025-09-23 11:19:50.948: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:19:50.948: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 4
+2025-09-23 11:19:50.948: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 4
+2025-09-23 11:19:50.948: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:19:50.948: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 3
+2025-09-23 11:19:50.948: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 4
+2025-09-23 11:19:50.948: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:19:50.948: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 2
+2025-09-23 11:19:50.948: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 4
+2025-09-23 11:19:50.948: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:19:50.949: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 1
+2025-09-23 11:19:50.954: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 4
+2025-09-23 11:19:50.954: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:19:50.961: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 0
+2025-09-23 11:19:50.966: [INFO][Sync]     Configuration completed, state: 3
+2025-09-23 11:19:50.966: [INFO][Sync] Configured DataTypeManager: Ok
+2025-09-23 11:19:50.974: [INFO][SyncEngineBackend::DoStartSyncing] Start syncing
+2025-09-23 11:20:07.762: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-23 11:20:07.762: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-23 11:20:37.771: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-23 11:20:37.771: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-23 11:21:09.416: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-23 11:21:09.417: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-23 11:21:43.315: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-23 11:21:43.316: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-23 11:22:21.047: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-23 11:22:21.047: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-23 11:23:06.652: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-23 11:23:06.652: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-23 11:24:02.965: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: The request runs exceeded the set maximum duration. for account type: MSA
+2025-09-23 11:24:02.965: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-23 11:25:09.103: [INFO][SyncAuthManager::SetLastAuthError] Current auth error: None
+2025-09-23 11:25:09.103: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: None for account type: MSA
+2025-09-23 11:25:09.103: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-23 11:26:46.561: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 11:26:46.561: [INFO][Commit::ReportFullCommitFailure] Commit Sessions, History failed with error: NetworkError
+2025-09-23 11:26:46.562: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 11:26:46.562: [INFO][SyncEngineBackend::DoUpdateKeyDataCredentials] Update key data credentials
+2025-09-23 11:26:46.572: [WARN][Sync] NetworkError: Network error (ERR_TIMED_OUT)
+2025-09-23 11:27:10.370: [INFO][Sync] Started DataTypeManager configuration, reason: 5
+2025-09-23 11:27:10.370: [INFO][Sync] Configuring for: Bookmarks, Preferences, Passwords, Autofill Profiles, Autofill, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys, reason: 5, current state: 3
+2025-09-23 11:27:10.380: [INFO][SyncEngineBackend::DoStartConfiguration] Start configuration
+2025-09-23 11:27:10.389: [INFO][Sync] Configure, desired: Bookmarks, Preferences, Passwords, Autofill Profiles, Autofill, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys; Allow fail: 
+2025-09-23 11:27:10.389: [INFO][Sync] Loading: Passwords
+2025-09-23 11:27:10.389: [INFO][Sync] Loading: Autofill Profiles
+2025-09-23 11:27:10.389: [INFO][Sync] Loading: Autofill
+2025-09-23 11:27:10.397: [INFO][Sync] All data types are ready for configure.
+2025-09-23 11:27:10.397: [INFO][SyncManagerImpl::NudgeForInitialDownload] Initial download nudge for Passwords
+2025-09-23 11:27:10.397: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 5
+2025-09-23 11:27:10.397: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:27:10.397: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 4
+2025-09-23 11:27:10.397: [INFO][Sync] Prepare to configure types: Passwords, Encryption Keys
+2025-09-23 11:27:10.398: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download: Passwords, Encryption Keys with reason: 5
+2025-09-23 11:27:10.398: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Passwords, Encryption Keys
+2025-09-23 11:27:40.884: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 11:27:40.885: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 11:27:40.891: [WARN][Sync] NetworkError: Network error (ERR_TIMED_OUT)
+2025-09-23 11:27:42.393: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Passwords, Encryption Keys
+2025-09-23 11:28:12.465: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 11:28:12.477: [WARN][Sync] NetworkError: Network error (ERR_TIMED_OUT)
+2025-09-23 11:28:12.495: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 11:28:16.258: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Passwords, Encryption Keys
+2025-09-23 11:29:03.945: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:29:03.946: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Syncer error: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:29:03.956: [WARN][Sync] NetworkError: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:29:13.329: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Passwords, Encryption Keys
+2025-09-23 11:29:18.025: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: Passwords, Encryption Keys
+2025-09-23 11:29:18.030: [INFO][Sync] ConfigurationDone, failed: , succeeded: Passwords, Encryption Keys, remaining count: 3
+2025-09-23 11:29:18.030: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 5
+2025-09-23 11:29:18.030: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:29:18.036: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 2
+2025-09-23 11:29:18.037: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 5
+2025-09-23 11:29:18.037: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:29:18.044: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 1
+2025-09-23 11:29:18.049: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 5
+2025-09-23 11:29:18.049: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 11:29:18.049: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 0
+2025-09-23 11:29:18.055: [INFO][Sync]     Configuration completed, state: 3
+2025-09-23 11:29:18.055: [INFO][Sync] Configured DataTypeManager: Ok
+2025-09-23 11:29:18.062: [INFO][SyncEngineBackend::DoStartSyncing] Start syncing
+2025-09-23 11:34:19.772: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:34:19.773: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:34:19.780: [WARN][Sync] NetworkError: Network error (ERR_CONNECTION_RESET)
+2025-09-23 11:40:47.296: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 11:40:47.296: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 11:40:47.306: [WARN][Sync] NetworkError: Network error (ERR_TIMED_OUT)
+2025-09-23 12:17:41.624: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 12:17:41.624: [INFO][Commit::ReportFullCommitFailure] Commit Sessions, History failed with error: NetworkError
+2025-09-23 12:17:41.624: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 12:17:41.635: [WARN][Sync] NetworkError: Network error (ERR_TIMED_OUT)
+2025-09-23 12:18:26.474: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_CONNECTION_TIMED_OUT)
+2025-09-23 12:18:26.477: [INFO][Commit::ReportFullCommitFailure] Commit Sessions, History failed with error: NetworkError
+2025-09-23 12:18:26.478: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_CONNECTION_TIMED_OUT)
+2025-09-23 12:18:26.479: [WARN][Sync] NetworkError: Network error (ERR_CONNECTION_TIMED_OUT)
+2025-09-23 12:18:48.372: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_NAME_NOT_RESOLVED)
+2025-09-23 12:18:48.372: [INFO][Commit::ReportFullCommitFailure] Commit Sessions, History failed with error: NetworkError
+2025-09-23 12:18:48.372: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_NAME_NOT_RESOLVED)
+2025-09-23 12:18:48.376: [WARN][Sync] NetworkError: Network error (ERR_NAME_NOT_RESOLVED)
+2025-09-23 12:18:58.159: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_NETWORK_CHANGED)
+2025-09-23 12:18:58.160: [INFO][Commit::ReportFullCommitFailure] Commit Sessions, History failed with error: NetworkError
+2025-09-23 12:18:58.160: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_NETWORK_CHANGED)
+2025-09-23 12:18:58.166: [WARN][Sync] NetworkError: Network error (ERR_NETWORK_CHANGED)
+2025-09-23 12:19:21.824: [INFO][Sync] Reset engine, reason: 0
+2025-09-23 12:19:21.824: [INFO][Sync] Reset engine with reason: 0
+2025-09-23 15:50:05.366: [INFO][Sync] SyncState after authenticated was: FeatureCanStart
+2025-09-23 15:50:15.527: [INFO][Sync] Try to start sync engine
+2025-09-23 15:50:15.531: [INFO][SyncManagerImpl::NudgeForInitialDownload] Initial download nudge for Encryption Keys
+2025-09-23 15:50:15.531: [INFO][SyncEngineBackend::LoadAndConnectNigoriController] Load and connect Nigori controller
+2025-09-23 15:50:15.531: [INFO][SyncEngineBackend::DoInitialize] Control Types added: Encryption Keys
+2025-09-23 15:50:15.531: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download: Encryption Keys with reason: 3
+2025-09-23 15:50:15.531: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Configure job was blocked
+2025-09-23 15:50:15.586: [INFO][SyncAuthManager::SetLastAuthError] Current auth error: None
+2025-09-23 15:50:15.586: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: None for account type: MSA
+2025-09-23 15:50:15.586: [INFO][Sync] Credentials changed for: EdgeSyncScopeNew
+2025-09-23 15:50:22.216: [INFO][SyncAuthManager::SetLastAuthError] Current auth error: None
+2025-09-23 15:50:22.216: [INFO][SyncAuthManager::EdgeLogTokenErrorState] Token error with: None for account type: MSA
+2025-09-23 15:50:22.216: [INFO][Sync] Credentials changed for: EdgeSyncKeyDataScope
+2025-09-23 15:50:22.216: [INFO][SyncEngineBackend::DoUpdateKeyDataCredentials] Update key data credentials
+2025-09-23 15:50:22.216: [INFO][SyncEngineBackend::DoUpdateCredentials] Update credentials
+2025-09-23 15:50:22.216: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Encryption Keys
+2025-09-23 15:50:24.140: [INFO][Sync] Started DataTypeManager configuration, reason: 4
+2025-09-23 15:50:24.140: [INFO][Sync] Configuring for: Bookmarks, Preferences, Passwords, Autofill Profiles, Autofill, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys, reason: 4, current state: 0
+2025-09-23 15:50:24.141: [WARN][Sync] Crypto error data types: Passwords, Autofill Profiles, Autofill
+2025-09-23 15:50:24.147: [INFO][Sync] Configure, desired: Bookmarks, Preferences, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys; Allow fail: Passwords, Autofill Profiles, Autofill
+2025-09-23 15:50:24.147: [INFO][Sync] Loading: Bookmarks
+2025-09-23 15:50:24.147: [INFO][Sync] Loading: Preferences
+2025-09-23 15:50:24.147: [INFO][Sync] Loading: Extensions
+2025-09-23 15:50:24.147: [INFO][Sync] Loading: Sessions
+2025-09-23 15:50:24.147: [INFO][Sync] Loading: Extension settings
+2025-09-23 15:50:24.147: [INFO][Sync] Loading: History Delete Directives
+2025-09-23 15:50:24.148: [INFO][Sync] Loading: Device Info
+2025-09-23 15:50:24.148: [INFO][Sync] Loading: User Consents
+2025-09-23 15:50:24.148: [INFO][Sync] Loading: Send Tab To Self
+2025-09-23 15:50:24.148: [INFO][Sync] Loading: Web Apps
+2025-09-23 15:50:24.148: [INFO][Sync] Loading: History
+2025-09-23 15:50:24.148: [INFO][Sync] Loading: Saved Tab Group
+2025-09-23 15:50:24.148: [INFO][Sync] Loading: WebAuthn Credentials
+2025-09-23 15:50:24.148: [INFO][Sync] Loading: Collection
+2025-09-23 15:50:24.148: [INFO][Sync] Loading: Edge E Drop
+2025-09-23 15:50:24.148: [INFO][Sync] Loading: Edge Hub App Usage
+2025-09-23 15:50:24.148: [INFO][Sync] Loading: Edge Wallet
+2025-09-23 15:50:24.780: [INFO][Sync] All data types are ready for configure.
+2025-09-23 15:50:25.341: [INFO][Sync] Started DataTypeManager configuration, reason: 5
+2025-09-23 15:50:25.342: [INFO][Sync] Configuring for: Bookmarks, Preferences, Passwords, Autofill Profiles, Autofill, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys, reason: 5, current state: 1
+2025-09-23 15:50:25.349: [INFO][SyncEngineBackend::DoStartConfiguration] Start configuration
+2025-09-23 15:50:25.350: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 4
+2025-09-23 15:50:25.350: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 15:50:25.351: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 4
+2025-09-23 15:50:25.351: [WARN][Sync]     Reconfigure requested while configuration ongoing.
+2025-09-23 15:50:25.351: [INFO][Sync] Configuring for: Bookmarks, Preferences, Passwords, Autofill Profiles, Autofill, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys, reason: 5, current state: 2
+2025-09-23 15:50:25.351: [INFO][Sync] Configure, desired: Bookmarks, Preferences, Passwords, Autofill Profiles, Autofill, Extensions, Sessions, Extension settings, History Delete Directives, Device Info, User Consents, Send Tab To Self, Web Apps, History, Saved Tab Group, WebAuthn Credentials, Collection, Edge E Drop, Edge Hub App Usage, Edge Wallet, Encryption Keys; Allow fail: 
+2025-09-23 15:50:25.351: [INFO][Sync] Loading: Passwords
+2025-09-23 15:50:25.351: [INFO][Sync] Loading: Autofill Profiles
+2025-09-23 15:50:25.351: [INFO][Sync] Loading: Autofill
+2025-09-23 15:50:25.357: [INFO][Sync] All data types are ready for configure.
+2025-09-23 15:50:25.357: [INFO][SyncManagerImpl::NudgeForInitialDownload] Initial download nudge for Passwords
+2025-09-23 15:50:25.358: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 5
+2025-09-23 15:50:25.358: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 15:50:25.358: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 4
+2025-09-23 15:50:25.358: [INFO][Sync] Prepare to configure types: Passwords, Encryption Keys
+2025-09-23 15:50:25.359: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download: Passwords, Encryption Keys with reason: 5
+2025-09-23 15:50:25.359: [INFO][SyncSchedulerImpl::DoConfigurationSyncCycleJob] Blocked types:  and types to download: Passwords, Encryption Keys
+2025-09-23 15:50:26.570: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: Passwords, Encryption Keys
+2025-09-23 15:50:26.575: [INFO][Sync] ConfigurationDone, failed: , succeeded: Passwords, Encryption Keys, remaining count: 3
+2025-09-23 15:50:26.575: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 5
+2025-09-23 15:50:26.575: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 15:50:26.575: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 2
+2025-09-23 15:50:26.575: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 5
+2025-09-23 15:50:26.575: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 15:50:26.575: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 1
+2025-09-23 15:50:26.582: [INFO][SyncManagerImpl::ConfigureSyncer] Types to download:  with reason: 5
+2025-09-23 15:50:26.582: [INFO][SyncEngineBackend::DoFinishConfigureDataTypes] Failed to download types:  and succeeded types: 
+2025-09-23 15:50:26.588: [INFO][Sync] ConfigurationDone, failed: , succeeded: , remaining count: 0
+2025-09-23 15:50:26.593: [INFO][Sync]     Configuration completed, state: 7
+2025-09-23 15:50:26.593: [INFO][Sync] Configured DataTypeManager: Ok
+2025-09-23 15:50:26.602: [INFO][SyncEngineBackend::DoStartSyncing] Start syncing
+2025-09-23 16:16:59.056: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 16:16:59.057: [INFO][Commit::ReportFullCommitFailure] Commit Sessions failed with error: NetworkError
+2025-09-23 16:16:59.057: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 16:16:59.062: [WARN][Sync] NetworkError: Network error (ERR_TIMED_OUT)
+2025-09-23 16:49:38.718: [INFO][SyncSchedulerImpl::OnSyncNetworkError] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 16:49:38.719: [INFO][Commit::ReportFullCommitFailure] Commit Sessions, History failed with error: NetworkError
+2025-09-23 16:49:38.719: [INFO][SyncSchedulerImpl::DoNudgeSyncCycleJob] Syncer error: Network error (ERR_TIMED_OUT)
+2025-09-23 16:49:38.730: [WARN][Sync] NetworkError: Network error (ERR_TIMED_OUT)
+2025-09-23 17:36:45.734: [INFO][Sync] Reset engine, reason: 0

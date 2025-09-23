@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../routes.dart';
 import '../../services/api_service.dart';
+import 'inspector_questionnaires_screen.dart';
 
 class DashboardInspection extends StatefulWidget {
   const DashboardInspection({super.key});
@@ -129,8 +130,12 @@ class _DashboardInspectionState extends State<DashboardInspection> {
                       'Questionnaires',
                       Icons.assignment,
                       Colors.blue,
-                      () => Navigator.pushNamed(
-                          context, RoutesApp.questionnaires),
+                      () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => InspectorQuestionnairesScreen(),
+                        ),
+                      ),
                     ),
                     _buildActionCard(
                       'Rapports d\'analyse',

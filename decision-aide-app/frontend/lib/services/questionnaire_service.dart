@@ -6,7 +6,33 @@ import '../modeles/questionnaire.dart';
 import '../modeles/utilisateur.dart';
 
 class QuestionnaireService {
-  /// Retourne l'utilisateur actuellement connecté (objet UtilisateurModele)
+  /// Liste les questionnaires créés par l'utilisateur connecté (inspecteur)
+  Future<List<QuestionnaireModele>> listerParCreateur() async {
+    final http.Response res =
+        await _api.get('/api/inspection/mes-questionnaires');
+    if (res.statusCode == 200) {
+      final List<dynamic> data = jsonDecode(res.body) as List<dynamic>;
+      return data
+          .map((e) => QuestionnaireModele.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+    return [];
+  }
+
+  /// Liste les questionnaires créés par l'utilisateur connecté filtrés par destinataire ("ELEVE" ou "ENSEIGNANT")
+  Future<List<QuestionnaireModele>> listerParCreateurEtDestinataire(
+      String destinataire) async {
+    final http.Response res =
+        await _api.get('/api/inspection/mes-questionnaires/$destinataire');
+    if (res.statusCode == 200) {
+      final List<dynamic> data = jsonDecode(res.body) as List<dynamic>;
+      return data
+          .map((e) => QuestionnaireModele.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+    return [];
+  }
+
   Future<UtilisateurModele?> profilActuel() async {
     final utilisateurMap = await _api.profilActuel();
     if (utilisateurMap != null) {
@@ -74,13 +100,14 @@ class QuestionnaireService {
       final List<dynamic> data = jsonDecode(res.body) as List<dynamic>;
       final utilisateur = await profilActuel();
       String role = '';
-      if (utilisateur != null && utilisateur.role != null) {
+      if (utilisateur != null) {
         role = utilisateur.role.toString().toUpperCase();
       }
       // On filtre selon le rôle : si ENSEIGNANT, on ne voit que les questionnaires destinés aux enseignants, etc.
       return data
           .map((e) => QuestionnaireModele.fromJson(e as Map<String, dynamic>))
-          .where((q) => q.destinataire.toUpperCase() == role)
+          .where(
+              (q) => q.destinataire.toUpperCase() == role && q.partage == true)
           .toList();
     }
     return [];
