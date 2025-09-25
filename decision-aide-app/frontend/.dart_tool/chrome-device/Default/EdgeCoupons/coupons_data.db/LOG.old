@@ -1,17 +1,27 @@
-2025/09/23-17:50:16.987 8bc Reusing MANIFEST C:\Users\ngago\AppData\Local\Temp\flutter_tools.b4e9a25d\flutter_tools_chrome_device.700830d1\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
-2025/09/23-17:50:16.989 8bc Recovering log #26
-2025/09/23-17:50:16.989 8bc Reusing old log C:\Users\ngago\AppData\Local\Temp\flutter_tools.b4e9a25d\flutter_tools_chrome_device.700830d1\Default\EdgeCoupons/coupons_data.db/000026.log 
-2025/09/23-17:50:16.990 8bc Delete type=0 #4
-2025/09/23-17:50:16.990 8bc Delete type=0 #7
-2025/09/23-17:50:16.991 8bc Delete type=2 #8
-2025/09/23-17:50:16.991 8bc Delete type=0 #10
-2025/09/23-17:50:16.991 8bc Delete type=2 #11
-2025/09/23-17:50:16.991 8bc Delete type=0 #13
-2025/09/23-17:50:16.991 8bc Delete type=2 #14
-2025/09/23-17:50:16.991 8bc Delete type=0 #16
-2025/09/23-17:50:17.953 8bc Delete type=2 #17
-2025/09/23-17:50:18.008 8bc Delete type=0 #19
-2025/09/23-17:50:18.303 8bc Delete type=0 #23
-2025/09/23-17:51:26.675 2488 Level-0 table #30: started
-2025/09/23-17:51:26.755 2488 Level-0 table #30: 672352 bytes OK
-2025/09/23-17:51:26.776 2488 Delete type=0 #26
+2025/09/23-19:45:16.416 30b0 Reusing MANIFEST C:\Users\ngago\AppData\Local\Temp\flutter_tools.5114ac69\flutter_tools_chrome_device.43f0619\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2025/09/23-19:45:16.418 30b0 Recovering log #29
+2025/09/23-19:45:16.419 30b0 Reusing old log C:\Users\ngago\AppData\Local\Temp\flutter_tools.5114ac69\flutter_tools_chrome_device.43f0619\Default\EdgeCoupons/coupons_data.db/000029.log 
+2025/09/23-19:45:16.421 30b0 Delete type=0 #4
+2025/09/23-19:45:16.421 30b0 Delete type=0 #7
+2025/09/23-19:45:16.421 30b0 Delete type=2 #8
+2025/09/23-19:45:16.421 30b0 Delete type=0 #10
+2025/09/23-19:45:16.421 30b0 Delete type=2 #11
+2025/09/23-19:45:16.421 30b0 Delete type=0 #13
+2025/09/23-19:45:16.421 30b0 Delete type=2 #14
+2025/09/23-19:45:18.465 30b0 Delete type=0 #16
+2025/09/23-19:45:19.579 30b0 Delete type=2 #17
+2025/09/23-19:45:20.820 30b0 Delete type=0 #19
+2025/09/23-19:45:22.216 30b0 Delete type=0 #23
+2025/09/23-19:45:23.733 30b0 Delete type=0 #26
+2025/09/23-19:46:28.326 c94 Level-0 table #33: started
+2025/09/23-19:46:28.455 c94 Level-0 table #33: 672352 bytes OK
+2025/09/23-19:46:28.509 c94 Delete type=0 #29
+2025/09/23-19:46:28.511 223c Compacting 4@0 + 1@1 files
+2025/09/23-19:46:28.633 223c Generated table #34@0: 4 keys, 672259 bytes
+2025/09/23-19:46:28.633 223c Compacted 4@0 + 1@1 files => 672259 bytes
+2025/09/23-19:46:28.668 223c compacted to: files[ 0 1 1 0 0 0 0 ]
+2025/09/23-19:46:28.673 223c Delete type=2 #21
+2025/09/23-19:46:28.674 223c Delete type=2 #24
+2025/09/23-19:46:28.674 223c Delete type=2 #27
+2025/09/23-19:46:28.674 223c Delete type=2 #30
+2025/09/23-19:46:28.675 223c Delete type=2 #33

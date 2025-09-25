@@ -5,6 +5,29 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
+  /// Récupère l'analyse des réponses pour le dashboard inspection
+  Future<Map<String, dynamic>> getAnalyseReponsesInspection(
+      int questionnaireId, String typeQuestionnaire) async {
+    final res = await post(
+      '/api/inspection/analyser-reponses/$questionnaireId?typeQuestionnaire=$typeQuestionnaire',
+      {}, // body vide
+    );
+    if (res.statusCode == 200) {
+      return jsonDecode(res.body) as Map<String, dynamic>;
+    }
+    throw Exception(
+        'Erreur lors de la récupération de l\'analyse des réponses');
+  }
+
+  /// Récupère les statistiques globales pour le dashboard inspection
+  Future<Map<String, dynamic>> getStatsDashboardInspection() async {
+    final res = await get('/api/inspection/stats-dashboard');
+    if (res.statusCode == 200) {
+      return jsonDecode(res.body) as Map<String, dynamic>;
+    }
+    throw Exception('Erreur lors de la récupération des statistiques');
+  }
+
   Future<http.Response> put(String chemin, Map<String, dynamic> data) async {
     final jeton = await lireJeton();
     final url = Uri.parse('$baseUrl$chemin');

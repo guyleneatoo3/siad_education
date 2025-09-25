@@ -1,3 +1,4 @@
+
 package sn.siad.controller;
 
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,24 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/inspection")
 public class ControleurInspection {
+    /**
+     * Statistiques globales pour le dashboard inspection
+     */
+    @GetMapping("/stats-dashboard")
+    @PreAuthorize("hasRole('INSPECTION')")
+    public ResponseEntity<Map<String, Object>> statistiquesDashboard() {
+        long nbEtablissements = depotEtablissement.count();
+        long nbQuestionnaires = depotQuestionnaire.count();
+        long nbReponses = depotReponse.count();
+        long nbRapports = depotRapport.count();
+        Map<String, Object> stats = Map.of(
+            "etablissements", nbEtablissements,
+            "questionnaires", nbQuestionnaires,
+            "reponses", nbReponses,
+            "rapports", nbRapports
+        );
+        return ResponseEntity.ok(stats);
+    }
 
     private final ServiceMistral serviceMistral;
     private final DepotQuestionnaire depotQuestionnaire;

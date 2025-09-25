@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../routes.dart';
 import '../../services/api_service.dart';
+import 'analyse_reponses_inspection_screen.dart';
 import 'inspector_questionnaires_screen.dart';
 
 class DashboardInspection extends StatefulWidget {
@@ -13,11 +14,15 @@ class DashboardInspection extends StatefulWidget {
 class _DashboardInspectionState extends State<DashboardInspection> {
   final ApiService _api = ApiService();
   late Future<Map<String, dynamic>?> _profilFuture;
+  late Future<Map<String, dynamic>> _statsFuture;
 
   @override
   void initState() {
     super.initState();
     _profilFuture = _api.profilActuel();
+    _statsFuture = _api.getStatsDashboardInspection();
+    // Retiré l'appel direct à getAnalyseReponsesInspection car il nécessite des arguments
+    // et doit être appelé dans l'écran d'analyse, pas ici.
   }
 
   @override
@@ -53,181 +58,206 @@ class _DashboardInspectionState extends State<DashboardInspection> {
           final profil = snap.data;
           final nomComplet = profil?['nomComplet'] ?? 'Inspecteur';
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Header avec profil
-                Card(
-                  elevation: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Row(
+          return FutureBuilder<Map<String, dynamic>>(
+            future: _statsFuture,
+            builder: (context, statsSnap) {
+              if (statsSnap.connectionState != ConnectionState.done) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              final stats = statsSnap.data ?? {};
+              final nbEtab = stats['etablissements']?.toString() ?? '0';
+              final nbQuest = stats['questionnaires']?.toString() ?? '0';
+              final nbRep = stats['reponses']?.toString() ?? '0';
+              final nbRap = stats['rapports']?.toString() ?? '0';
+
+              return SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Header avec profil
+                    Card(
+                      elevation: 4,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.teal[600],
+                              child: const Icon(Icons.verified_user,
+                                  size: 30, color: Colors.white),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Bonjour, $nomComplet',
+                                    style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    'Inspecteur Académique',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.grey[600],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+
+                    // Section des actions principales
+                    const Text(
+                      'Actions d\'Inspection',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    // Grille des actions
+                    GridView.count(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 1.2,
                       children: [
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.teal[600],
-                          child: const Icon(Icons.verified_user,
-                              size: 30, color: Colors.white),
+                        _buildActionCard(
+                          'Valider établissements',
+                          Icons.verified_user,
+                          Colors.green,
+                          () => Navigator.pushNamed(
+                              context, RoutesApp.etablissements),
+                        ),
+                        _buildActionCard(
+                          'Questionnaires',
+                          Icons.assignment,
+                          Colors.blue,
+                          () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => InspectorQuestionnairesScreen(),
+                            ),
+                          ),
+                        ),
+                        _buildActionCard(
+                          'Rapports d\'analyse',
+                          Icons.analytics,
+                          Colors.teal,
+                          () =>
+                              Navigator.pushNamed(context, RoutesApp.rapports),
+                        ),
+                        _buildActionCard(
+                          'Décisions publiées',
+                          Icons.campaign,
+                          Colors.orange,
+                          () =>
+                              Navigator.pushNamed(context, RoutesApp.decisions),
+                        ),
+                        _buildActionCard(
+                          'Réponses',
+                          Icons.assignment_turned_in,
+                          Colors.indigo,
+                          () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  AnalyseReponsesInspectionScreen(api: _api),
+                            ),
+                          ),
+                        ),
+                        _buildActionCard(
+                          'Test Mistral',
+                          Icons.psychology,
+                          Colors.purple,
+                          () => Navigator.pushNamed(
+                              context, RoutesApp.mistralTest),
+                        ),
+                        _buildActionCard(
+                          'Mon profil',
+                          Icons.person,
+                          Colors.grey,
+                          () => Navigator.pushNamed(
+                              context, RoutesApp.utilisateurs),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Section des statistiques
+                    const Text(
+                      'Statistiques d\'Inspection',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildStatCard(
+                            'Établissements',
+                            nbEtab,
+                            Icons.school,
+                            Colors.green,
+                          ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Bonjour, $nomComplet',
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Inspecteur Académique',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey[600],
-                                ),
-                              ),
-                            ],
+                          child: _buildStatCard(
+                            'Questionnaires',
+                            nbQuest,
+                            Icons.assignment,
+                            Colors.blue,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-
-                // Section des actions principales
-                const Text(
-                  'Actions d\'Inspection',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                // Grille des actions
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 1.2,
-                  children: [
-                    _buildActionCard(
-                      'Valider établissements',
-                      Icons.verified_user,
-                      Colors.green,
-                      () => Navigator.pushNamed(
-                          context, RoutesApp.etablissements),
-                    ),
-                    _buildActionCard(
-                      'Questionnaires',
-                      Icons.assignment,
-                      Colors.blue,
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => InspectorQuestionnairesScreen(),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildStatCard(
+                            'Rapports',
+                            nbRap,
+                            Icons.analytics,
+                            Colors.teal,
+                          ),
                         ),
-                      ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: _buildStatCard(
+                            'Réponses',
+                            nbRep,
+                            Icons.check_circle,
+                            Colors.indigo,
+                          ),
+                        ),
+                      ],
                     ),
-                    _buildActionCard(
-                      'Rapports d\'analyse',
-                      Icons.analytics,
-                      Colors.teal,
-                      () => Navigator.pushNamed(context, RoutesApp.rapports),
-                    ),
-                    _buildActionCard(
-                      'Décisions publiées',
-                      Icons.campaign,
-                      Colors.orange,
-                      () => Navigator.pushNamed(context, RoutesApp.decisions),
-                    ),
-                    _buildActionCard(
-                      'Réponses',
-                      Icons.assignment_turned_in,
-                      Colors.indigo,
-                      () => Navigator.pushNamed(context, RoutesApp.reponses),
-                    ),
-                    _buildActionCard(
-                      'Test Mistral',
-                      Icons.psychology,
-                      Colors.purple,
-                      () => Navigator.pushNamed(context, RoutesApp.mistralTest),
-                    ),
-                    _buildActionCard(
-                      'Mon profil',
-                      Icons.person,
-                      Colors.grey,
-                      () =>
-                          Navigator.pushNamed(context, RoutesApp.utilisateurs),
-                    ),
+                    const SizedBox(height: 24),
+                    // Bloc analyse des réponses supprimé ici : voir l'écran dédié AnalyseReponsesInspectionScreen
                   ],
                 ),
-
-                const SizedBox(height: 24),
-
-                // Section des statistiques
-                const Text(
-                  'Statistiques d\'Inspection',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildStatCard(
-                        'Établissements',
-                        '0',
-                        Icons.school,
-                        Colors.green,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: _buildStatCard(
-                        'Questionnaires',
-                        '0',
-                        Icons.assignment,
-                        Colors.blue,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildStatCard(
-                        'Rapports',
-                        '0',
-                        Icons.analytics,
-                        Colors.teal,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: _buildStatCard(
-                        'Réponses',
-                        '0',
-                        Icons.check_circle,
-                        Colors.indigo,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+              );
+            },
           );
         },
       ),

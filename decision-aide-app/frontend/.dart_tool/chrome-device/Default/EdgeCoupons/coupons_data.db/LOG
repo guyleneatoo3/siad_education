@@ -1,27 +1,23 @@
-2025/09/23-19:45:16.416 30b0 Reusing MANIFEST C:\Users\ngago\AppData\Local\Temp\flutter_tools.5114ac69\flutter_tools_chrome_device.43f0619\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
-2025/09/23-19:45:16.418 30b0 Recovering log #29
-2025/09/23-19:45:16.419 30b0 Reusing old log C:\Users\ngago\AppData\Local\Temp\flutter_tools.5114ac69\flutter_tools_chrome_device.43f0619\Default\EdgeCoupons/coupons_data.db/000029.log 
-2025/09/23-19:45:16.421 30b0 Delete type=0 #4
-2025/09/23-19:45:16.421 30b0 Delete type=0 #7
-2025/09/23-19:45:16.421 30b0 Delete type=2 #8
-2025/09/23-19:45:16.421 30b0 Delete type=0 #10
-2025/09/23-19:45:16.421 30b0 Delete type=2 #11
-2025/09/23-19:45:16.421 30b0 Delete type=0 #13
-2025/09/23-19:45:16.421 30b0 Delete type=2 #14
-2025/09/23-19:45:18.465 30b0 Delete type=0 #16
-2025/09/23-19:45:19.579 30b0 Delete type=2 #17
-2025/09/23-19:45:20.820 30b0 Delete type=0 #19
-2025/09/23-19:45:22.216 30b0 Delete type=0 #23
-2025/09/23-19:45:23.733 30b0 Delete type=0 #26
-2025/09/23-19:46:28.326 c94 Level-0 table #33: started
-2025/09/23-19:46:28.455 c94 Level-0 table #33: 672352 bytes OK
-2025/09/23-19:46:28.509 c94 Delete type=0 #29
-2025/09/23-19:46:28.511 223c Compacting 4@0 + 1@1 files
-2025/09/23-19:46:28.633 223c Generated table #34@0: 4 keys, 672259 bytes
-2025/09/23-19:46:28.633 223c Compacted 4@0 + 1@1 files => 672259 bytes
-2025/09/23-19:46:28.668 223c compacted to: files[ 0 1 1 0 0 0 0 ]
-2025/09/23-19:46:28.673 223c Delete type=2 #21
-2025/09/23-19:46:28.674 223c Delete type=2 #24
-2025/09/23-19:46:28.674 223c Delete type=2 #27
-2025/09/23-19:46:28.674 223c Delete type=2 #30
-2025/09/23-19:46:28.675 223c Delete type=2 #33
+2025/09/24-19:31:27.269 2aac Reusing MANIFEST C:\Users\ngago\AppData\Local\Temp\flutter_tools.6d4f8f3c\flutter_tools_chrome_device.3db8ea74\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2025/09/24-19:31:27.431 2aac Recovering log #32
+2025/09/24-19:31:27.432 2aac Reusing old log C:\Users\ngago\AppData\Local\Temp\flutter_tools.6d4f8f3c\flutter_tools_chrome_device.3db8ea74\Default\EdgeCoupons/coupons_data.db/000032.log 
+2025/09/24-19:31:27.433 2aac Delete type=0 #4
+2025/09/24-19:31:27.434 2aac Delete type=0 #7
+2025/09/24-19:31:27.434 2aac Delete type=2 #8
+2025/09/24-19:31:27.434 2aac Delete type=0 #10
+2025/09/24-19:31:27.434 2aac Delete type=2 #11
+2025/09/24-19:31:27.434 2aac Delete type=0 #13
+2025/09/24-19:31:27.434 2aac Delete type=2 #14
+2025/09/24-19:31:29.288 2aac Delete type=0 #16
+2025/09/24-19:31:29.550 2aac Delete type=2 #17
+2025/09/24-19:31:29.682 2aac Delete type=0 #19
+2025/09/24-19:31:29.986 2aac Delete type=2 #21
+2025/09/24-19:31:30.111 2aac Delete type=0 #23
+2025/09/24-19:31:30.602 2aac Delete type=2 #24
+2025/09/24-19:31:30.967 2aac Delete type=0 #26
+2025/09/24-19:31:33.067 2aac Delete type=2 #27
+2025/09/24-19:31:37.695 2aac Delete type=0 #29
+2025/09/24-19:31:40.785 2aac Delete type=2 #30
+2025/09/24-19:33:02.349 2f30 Level-0 table #37: started
+2025/09/24-19:33:02.429 2f30 Level-0 table #37: 672352 bytes OK
+2025/09/24-19:33:02.483 2f30 Delete type=0 #32
