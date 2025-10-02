@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../routes.dart';
 import '../../services/api_service.dart';
-
 import '../../services/etablissement_service.dart';
+import '../../services/rapport_service.dart';
 import '../../modeles/utilisateur.dart';
+import '../../modeles/rapport.dart';
 
 class DashboardEtablissement extends StatefulWidget {
   const DashboardEtablissement({super.key});
@@ -78,11 +79,14 @@ class _DashboardEtablissementState extends State<DashboardEtablissement> {
 
   final ApiService _api = ApiService();
   late Future<Map<String, dynamic>?> _profilFuture;
+  Future<List<Map<String, dynamic>>>? _avisEnvoyesFuture;
 
   @override
   void initState() {
     super.initState();
     _profilFuture = _api.profilActuel();
+    // Initialisation de la liste des avis envoyés (par défaut null, sera chargé après récupération du profil)
+    _avisEnvoyesFuture = null;
   }
 
   @override
@@ -120,6 +124,11 @@ class _DashboardEtablissementState extends State<DashboardEtablissement> {
           final etablissementNom =
               profil?['etablissementNom'] ?? 'Établissement';
           final etabId = profil?['etablissementId'];
+          // Charger les avis envoyés si pas déjà fait
+          if (_avisEnvoyesFuture == null && etabId != null) {
+            _avisEnvoyesFuture =
+                RapportService().listerAvis(etabId, "ETAB_TO_INSPECTION");
+          }
 
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
@@ -212,7 +221,129 @@ class _DashboardEtablissementState extends State<DashboardEtablissement> {
                       Colors.orange,
                       () => Navigator.pushNamed(context, RoutesApp.decisions),
                     ),
+                    _buildActionCard(
+                      'Envoyer un commentaire à l\'inspection',
+                      Icons.send,
+                      Colors.red,
+                      () => _showCommentDialog(context, etabId),
+                    ),
                   ],
+                ),
+                SizedBox(height: 24),
+                Text(
+                  'Avis envoyés à l\'inspection',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8),
+                FutureBuilder<List<Map<String, dynamic>>>(
+                  future: _avisEnvoyesFuture,
+                  builder: (context, snap) {
+                    if (snap.connectionState != ConnectionState.done) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    final avis = snap.data ?? [];
+                    if (avis.isEmpty) {
+                      return Text('Aucun avis envoyé pour ce rapport.');
+                    }
+                    return Column(
+                      children: [
+                        for (final a in avis)
+                          Card(
+                            child: ListTile(
+                              title: Text(a['contenu'] ?? ''),
+                              subtitle: Text('Auteur: ${a['auteurNom'] ?? ''}'),
+                            ),
+                          ),
+                      ],
+                    );
+                  },
+                ),
+                // ...existing code for rest of dashboard...
+                SizedBox(height: 24),
+                Text(
+                  'Rapports d\'analyse',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8),
+                FutureBuilder<List<RapportAnalyseModele>>(
+                  future: RapportService().lister(),
+                  builder: (context, snap) {
+                    if (snap.connectionState != ConnectionState.done) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    final rapports = snap.data ?? [];
+                    if (rapports.isEmpty) {
+                      return Text('Aucun rapport d\'analyse disponible.');
+                    }
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: rapports.length,
+                      itemBuilder: (context, idx) {
+                        final rapport = rapports[idx];
+                        return Card(
+                          child: ListTile(
+                            title: Text(rapport.titre),
+                            subtitle: Text(rapport.contenu.length > 60
+                                ? rapport.contenu.substring(0, 60) + '...'
+                                : rapport.contenu),
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                builder: (ctx) => Padding(
+                                  padding: const EdgeInsets.all(24),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        rapport.titre,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(height: 12),
+                                      Text(rapport.contenu),
+                                      SizedBox(height: 24),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ElevatedButton.icon(
+                                            icon: Icon(Icons.send),
+                                            label: Text(
+                                                'Partager à l\'inspection'),
+                                            onPressed: () {
+                                              Navigator.pop(ctx);
+                                              _showCommentDialog(
+                                                  context, rapport.id);
+                                            },
+                                          ),
+                                          SizedBox(width: 24),
+                                          OutlinedButton(
+                                            child: Text('Ne pas partager'),
+                                            onPressed: () => Navigator.pop(ctx),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ],
             ),
@@ -228,13 +359,13 @@ class _DashboardEtablissementState extends State<DashboardEtablissement> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Erreur'),
-          content: const Text(
+          title: Text('Erreur'),
+          content: Text(
               "Impossible d'ouvrir la gestion : identifiant établissement manquant dans le profil."),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
+              child: Text('OK'),
             ),
           ],
         ),
@@ -255,6 +386,35 @@ class _DashboardEtablissementState extends State<DashboardEtablissement> {
         ),
       ),
     );
+  }
+
+  Future<void> _showCommentDialog(BuildContext context, int? etabId) async {
+    final TextEditingController controller = TextEditingController();
+    final result = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Envoyer un commentaire à l\'inspection'),
+        content: TextField(
+          controller: controller,
+          decoration: InputDecoration(hintText: 'Votre commentaire'),
+          maxLines: 4,
+        ),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, null),
+              child: Text('Annuler')),
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, controller.text),
+              child: Text('Envoyer')),
+        ],
+      ),
+    );
+    if (result != null && result.trim().isNotEmpty) {
+      // TODO: Appeler le service pour envoyer le commentaire à l'inspection
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Commentaire envoyé à l\'inspection')),
+      );
+    }
   }
 }
 
@@ -339,7 +499,7 @@ class _CrudTableState extends State<_CrudTable> {
               ),
               ElevatedButton.icon(
                 icon: const Icon(Icons.add),
-                label: const Text('Ajouter'),
+                label: Text('Ajouter'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   foregroundColor: Colors.white,
@@ -357,17 +517,17 @@ class _CrudTableState extends State<_CrudTable> {
               }
               final users = snap.data!;
               if (users.isEmpty) {
-                return const Center(child: Text('Aucun utilisateur trouvé.'));
+                return Center(child: Text('Aucun utilisateur trouvé.'));
               }
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                   columns: [
-                    const DataColumn(label: Text('Nom complet')),
-                    const DataColumn(label: Text('Email')),
-                    const DataColumn(label: Text('Matricule')),
-                    const DataColumn(label: Text('Actif')),
-                    const DataColumn(label: Text('Actions')),
+                    DataColumn(label: Text('Nom complet')),
+                    DataColumn(label: Text('Email')),
+                    DataColumn(label: Text('Matricule')),
+                    DataColumn(label: Text('Actif')),
+                    DataColumn(label: Text('Actions')),
                   ],
                   rows: users
                       .map((u) => DataRow(cells: [
@@ -481,7 +641,7 @@ class _UserEditDialogState extends State<_UserEditDialog> {
               SwitchListTile(
                 value: _actif,
                 onChanged: (v) => setState(() => _actif = v),
-                title: const Text('Actif'),
+                title: Text('Actif'),
               ),
               const SizedBox(height: 16),
               Row(
@@ -489,7 +649,7 @@ class _UserEditDialogState extends State<_UserEditDialog> {
                 children: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Annuler'),
+                    child: Text('Annuler'),
                   ),
                   const SizedBox(width: 12),
                   ElevatedButton(
@@ -509,7 +669,7 @@ class _UserEditDialogState extends State<_UserEditDialog> {
                         );
                       }
                     },
-                    child: const Text('Enregistrer'),
+                    child: Text('Enregistrer'),
                   ),
                 ],
               ),

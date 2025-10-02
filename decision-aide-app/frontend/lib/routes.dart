@@ -20,8 +20,10 @@ import 'screens/accueil_public_screen.dart';
 import 'screens/import_excel_screen.dart';
 import 'screens/mistral_test_screen.dart';
 import 'screens/inscription_etablissement.dart';
+import 'screens/rediger_decision_screen.dart';
 
 class RoutesApp {
+  static const String redigerDecision = '/rediger-decision';
   static const String accueilPublic = '/accueil';
   static const String connexion = '/connexion';
   static const String tableauBord = '/tableau';
@@ -66,6 +68,7 @@ class RoutesApp {
   }
 
   static Map<String, WidgetBuilder> routes(BuildContext context) => {
+        redigerDecision: (_) => const RedigerDecisionScreen(),
         accueilPublic: (_) => const AccueilPublicScreen(),
         connexion: (_) => const ConnexionScreen(),
         tableauBord: (_) => const TableauBordScreen(),

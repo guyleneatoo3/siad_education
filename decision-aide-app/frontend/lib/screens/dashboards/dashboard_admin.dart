@@ -12,12 +12,155 @@ class DashboardAdmin extends StatefulWidget {
 class _DashboardAdminState extends State<DashboardAdmin> {
   final ApiService _api = ApiService();
   late Future<Map<String, dynamic>?> _profilFuture;
-
+  late Future<List<dynamic>> _usersFuture;
   @override
   void initState() {
     super.initState();
     _profilFuture = _api.profilActuel();
+    _usersFuture = _api.getUsers();
   }
+
+  void _showUserForm(BuildContext context, {Map<String, dynamic>? user}) {
+    final _formKey = GlobalKey<FormState>();
+    String nomComplet = user?['nomComplet'] ?? '';
+    String email = user?['email'] ?? '';
+    String role = user?['role'] ?? 'ministere';
+    String nomInspection = user?['nomInspection'] ?? '';
+    String regionInspection = user?['regionInspection'] ?? '';
+    String motDePasse = '';
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Form(
+            key: _formKey,
+            child: StatefulBuilder(
+              builder: (context, setStateDialog) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                        user == null
+                            ? 'Ajouter un utilisateur'
+                            : 'Modifier utilisateur',
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 12),
+                    TextFormField(
+                      initialValue: nomComplet,
+                      decoration:
+                          const InputDecoration(labelText: 'Nom complet'),
+                      validator: (v) =>
+                          v == null || v.isEmpty ? 'Champ requis' : null,
+                      onChanged: (v) => nomComplet = v,
+                    ),
+                    const SizedBox(height: 8),
+                    TextFormField(
+                      initialValue: email,
+                      decoration: const InputDecoration(labelText: 'Email'),
+                      validator: (v) =>
+                          v == null || v.isEmpty ? 'Champ requis' : null,
+                      onChanged: (v) => email = v,
+                    ),
+                    const SizedBox(height: 8),
+                    DropdownButtonFormField<String>(
+                      value: role,
+                      decoration: const InputDecoration(labelText: 'Rôle'),
+                      items: const [
+                        DropdownMenuItem(
+                            value: 'ministere', child: Text('Ministère')),
+                        DropdownMenuItem(
+                            value: 'inspection', child: Text('Inspection')),
+                      ],
+                      onChanged: (v) {
+                        if (v != null) {
+                          setStateDialog(() {
+                            role = v;
+                          });
+                        }
+                      },
+                    ),
+                    if (role == 'inspection') ...[
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        initialValue: nomInspection,
+                        decoration: const InputDecoration(
+                            labelText: "Nom de l'inspection"),
+                        validator: (v) =>
+                            role == 'inspection' && (v == null || v.isEmpty)
+                                ? 'Champ requis'
+                                : null,
+                        onChanged: (v) => nomInspection = v,
+                      ),
+                      const SizedBox(height: 8),
+                      TextFormField(
+                        initialValue: regionInspection,
+                        decoration: const InputDecoration(labelText: 'Région'),
+                        validator: (v) =>
+                            role == 'inspection' && (v == null || v.isEmpty)
+                                ? 'Champ requis'
+                                : null,
+                        onChanged: (v) => regionInspection = v,
+                      ),
+                    ],
+                    const SizedBox(height: 8),
+                    TextFormField(
+                      initialValue: user == null ? '123456' : '',
+                      decoration: const InputDecoration(
+                          labelText: 'Mot de passe (défaut : 123456)'),
+                      validator: (v) =>
+                          v == null || v.isEmpty ? 'Champ requis' : null,
+                      onChanged: (v) => motDePasse = v,
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          child: const Text('Annuler'),
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                        ElevatedButton(
+                          child: Text(user == null ? 'Ajouter' : 'Enregistrer'),
+                          onPressed: () async {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              final data = {
+                                'nomComplet': nomComplet,
+                                'email': email,
+                                'role': role,
+                                'motDePasse':
+                                    motDePasse.isEmpty ? '123456' : motDePasse,
+                              };
+                              if (role == 'inspection') {
+                                data['nomInspection'] = nomInspection;
+                                data['regionInspection'] = regionInspection;
+                              }
+                              if (user == null) {
+                                await _api.createUser(data);
+                              } else {
+                                await _api.updateUser(user['id'], data);
+                              }
+                              setState(() {
+                                _usersFuture = _api.getUsers();
+                              });
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ...existing code...
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +172,105 @@ class _DashboardAdminState extends State<DashboardAdmin> {
         actions: [
           IconButton(
             icon: const Icon(Icons.person),
-            onPressed: () =>
-                Navigator.pushNamed(context, RoutesApp.utilisateurs),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => Dialog(
+                  child: Container(
+                    width: 600,
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('Gestion des utilisateurs',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            IconButton(
+                              icon: const Icon(Icons.add),
+                              tooltip: 'Ajouter',
+                              onPressed: () {
+                                _showUserForm(context, user: null);
+                              },
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        FutureBuilder<List<dynamic>>(
+                          future: _usersFuture,
+                          builder: (context, snap) {
+                            if (snap.connectionState != ConnectionState.done) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            }
+                            final users = snap.data ?? [];
+                            if (users.isEmpty) {
+                              return const Text('Aucun utilisateur trouvé.');
+                            }
+                            return SizedBox(
+                              height: 300,
+                              child: ListView.separated(
+                                itemCount: users.length,
+                                separatorBuilder: (_, __) => const Divider(),
+                                itemBuilder: (context, i) {
+                                  final user = users[i];
+                                  String role = user['role'] ?? '';
+                                  return ListTile(
+                                    leading: const Icon(Icons.person),
+                                    title: Text(
+                                        user['nomComplet'] ?? 'Utilisateur'),
+                                    subtitle: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(user['email'] ?? ''),
+                                        Text(
+                                            'Rôle : ${role == 'ministere' ? 'Ministère' : role == 'inspection' ? 'Inspection' : role}'),
+                                        if (role == 'inspection') ...[
+                                          Text(
+                                              "Inspection : ${user['nomInspection'] ?? ''}"),
+                                          Text(
+                                              "Région : ${user['regionInspection'] ?? ''}"),
+                                        ],
+                                      ],
+                                    ),
+                                    trailing: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        IconButton(
+                                          icon: const Icon(Icons.edit),
+                                          tooltip: 'Modifier',
+                                          onPressed: () {
+                                            _showUserForm(context, user: user);
+                                          },
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(Icons.delete),
+                                          tooltip: 'Supprimer',
+                                          onPressed: () async {
+                                            await _api.deleteUser(user['id']);
+                                            setState(() {
+                                              _usersFuture = _api.getUsers();
+                                            });
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
           IconButton(
             icon: const Icon(Icons.logout),
@@ -123,9 +363,99 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                       Icons.security,
                       Colors.red,
                       () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('Fonctionnalité à venir')),
+                        showDialog(
+                          context: context,
+                          builder: (context) => Dialog(
+                            child: Container(
+                              width: 600,
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text('Gestion des utilisateurs',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold)),
+                                      IconButton(
+                                        icon: const Icon(Icons.add),
+                                        tooltip: 'Ajouter',
+                                        onPressed: () {
+                                          _showUserForm(context, user: null);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 12),
+                                  FutureBuilder<List<dynamic>>(
+                                    future: _usersFuture,
+                                    builder: (context, snap) {
+                                      if (snap.connectionState !=
+                                          ConnectionState.done) {
+                                        return const Center(
+                                            child: CircularProgressIndicator());
+                                      }
+                                      final users = snap.data ?? [];
+                                      if (users.isEmpty) {
+                                        return const Text(
+                                            'Aucun utilisateur trouvé.');
+                                      }
+                                      return SizedBox(
+                                        height: 300,
+                                        child: ListView.separated(
+                                          itemCount: users.length,
+                                          separatorBuilder: (_, __) =>
+                                              const Divider(),
+                                          itemBuilder: (context, i) {
+                                            final user = users[i];
+                                            return ListTile(
+                                              leading: const Icon(Icons.person),
+                                              title: Text(user['nomComplet'] ??
+                                                  'Utilisateur'),
+                                              subtitle:
+                                                  Text(user['email'] ?? ''),
+                                              trailing: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  IconButton(
+                                                    icon:
+                                                        const Icon(Icons.edit),
+                                                    tooltip: 'Modifier',
+                                                    onPressed: () {
+                                                      _showUserForm(context,
+                                                          user: user);
+                                                    },
+                                                  ),
+                                                  IconButton(
+                                                    icon: const Icon(
+                                                        Icons.delete),
+                                                    tooltip: 'Supprimer',
+                                                    onPressed: () async {
+                                                      await _api.deleteUser(
+                                                          user['id']);
+                                                      setState(() {
+                                                        _usersFuture =
+                                                            _api.getUsers();
+                                                      });
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         );
                       },
                     ),
@@ -163,8 +493,6 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                     ),
                   ],
                 ),
-
-                const SizedBox(height: 24),
 
                 // Section des statistiques
                 const Text(
@@ -287,4 +615,6 @@ class _DashboardAdminState extends State<DashboardAdmin> {
       ),
     );
   }
+
+  // Supprimé doublon inutile
 }

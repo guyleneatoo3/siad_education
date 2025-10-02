@@ -1,6 +1,18 @@
+  import 'package:decision_aide_frontend/services/rapport_service.dart';
 import 'package:flutter/material.dart';
 import '../../routes.dart';
 import '../../services/api_service.dart';
+
+  Future<List<Map<String, dynamic>>>? _commentairesInspectionFuture;
+
+  void _chargerCommentairesInspection(int rapportId) {
+    setState(() {
+      _commentairesInspectionFuture = RapportService().listerCommentairesInspection(rapportId);
+    });
+  }
+  
+  void setState(Null Function() param0) {
+  }
 
 class DashboardMinistere extends StatefulWidget {
   const DashboardMinistere({super.key});
@@ -98,6 +110,35 @@ class _DashboardMinistereState extends State<DashboardMinistere> {
                   ),
                 ),
                 const SizedBox(height: 24),
+                  // Section des avis de l'inspection
+                  const Text(
+                    'Avis de l\'inspection',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  FutureBuilder<List<Map<String, dynamic>>>(
+                    future: _commentairesInspectionFuture,
+                    builder: (context, snap) {
+                      if (snap.connectionState != ConnectionState.done) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      final commentaires = snap.data ?? [];
+                      if (commentaires.isEmpty) {
+                        return const Text('Aucun avis de l\'inspection pour ce rapport.');
+                      }
+                      return Column(
+                        children: commentaires.map((c) => Card(
+                          child: ListTile(
+                            title: Text(c['commentaire'] ?? ''),
+                            subtitle: Text('Inspection: ${c['inspectionNom'] ?? ''}'),
+                          ),
+                        )).toList(),
+                      );
+                    },
+                  ),
 
                 // Section des actions principales
                 const Text(
@@ -125,21 +166,14 @@ class _DashboardMinistereState extends State<DashboardMinistere> {
                       () => Navigator.pushNamed(context, RoutesApp.decisions),
                     ),
                     _buildActionCard(
-                      'Questionnaires',
-                      Icons.assignment,
-                      Colors.orange,
-                      () => Navigator.pushNamed(
-                          context, RoutesApp.questionnaires),
-                    ),
-                    _buildActionCard(
                       'Rapports d\'analyse',
                       Icons.analytics,
                       Colors.teal,
                       () => Navigator.pushNamed(context, RoutesApp.rapports),
                     ),
                     _buildActionCard(
-                      'Mon profil',
-                      Icons.person,
+                      'Modifier mon profil',
+                      Icons.edit,
                       Colors.purple,
                       () =>
                           Navigator.pushNamed(context, RoutesApp.utilisateurs),
@@ -172,32 +206,10 @@ class _DashboardMinistereState extends State<DashboardMinistere> {
                     const SizedBox(width: 16),
                     Expanded(
                       child: _buildStatCard(
-                        'Questionnaires',
-                        '0',
-                        Icons.assignment,
-                        Colors.orange,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildStatCard(
                         'Rapports',
                         '0',
                         Icons.analytics,
                         Colors.teal,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: _buildStatCard(
-                        'Établissements',
-                        '0',
-                        Icons.school,
-                        Colors.green,
                       ),
                     ),
                   ],

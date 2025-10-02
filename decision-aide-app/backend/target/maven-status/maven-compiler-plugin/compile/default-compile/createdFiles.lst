@@ -2,6 +2,7 @@ sn\siad\controller\ControleurReponse.class
 sn\siad\model\RoleUtilisateur.class
 sn\siad\repository\DepotReponseQuestionnaire.class
 sn\siad\service\ServiceMistral.class
+com\siad\education\service\AvisService.class
 sn\siad\controller\ControleurUtilisateur$ChangementMotDePasse.class
 sn\siad\service\ServiceDecision.class
 sn\siad\repository\DepotUtilisateur.class
@@ -24,6 +25,7 @@ sn\siad\controller\ControleurEtablissement.class
 sn\siad\model\Questionnaire.class
 sn\siad\repository\DepotDecision.class
 sn\siad\service\ServiceQuestionnaire.class
+com\siad\education\repository\AvisRepository.class
 sn\siad\service\ServiceEtablissement.class
 sn\siad\service\ServiceUtilisateur.class
 sn\siad\model\RapportAnalyse.class
@@ -36,4 +38,6 @@ sn\siad\repository\DepotRapportAnalyse.class
 sn\siad\security\ConfigurationSecurite.class
 sn\siad\model\Etablissement.class
 sn\siad\model\Utilisateur.class
+com\siad\education\controller\AvisController.class
 sn\siad\controller\ControleurAuth$DemandeConnexion.class
+com\siad\education\model\Avis.class

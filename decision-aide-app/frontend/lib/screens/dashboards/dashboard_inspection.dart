@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../routes.dart';
 import '../../services/api_service.dart';
+import '../../services/rapport_service.dart';
+import '../../modeles/rapport.dart';
 import 'analyse_reponses_inspection_screen.dart';
 import 'inspector_questionnaires_screen.dart';
 
@@ -15,14 +17,55 @@ class _DashboardInspectionState extends State<DashboardInspection> {
   final ApiService _api = ApiService();
   late Future<Map<String, dynamic>?> _profilFuture;
   late Future<Map<String, dynamic>> _statsFuture;
+  Future<List<Map<String, dynamic>>>? _commentairesFuture;
 
   @override
   void initState() {
     super.initState();
     _profilFuture = _api.profilActuel();
     _statsFuture = _api.getStatsDashboardInspection();
-    // Retiré l'appel direct à getAnalyseReponsesInspection car il nécessite des arguments
-    // et doit être appelé dans l'écran d'analyse, pas ici.
+    // Les commentaires sont chargés après sélection d'un rapport
+    _commentairesFuture = null;
+  }
+
+  void _chargerCommentaires(int rapportId) {
+    setState(() {
+      _commentairesFuture =
+          RapportService().listerCommentairesEtablissements(rapportId);
+    });
+  }
+
+  Future<void> _showCommentDialog(BuildContext context, int? rapportId) async {
+    final TextEditingController controller = TextEditingController();
+    final result = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Rédiger un avis à envoyer au ministère'),
+        content: TextField(
+          controller: controller,
+          decoration: InputDecoration(hintText: 'Votre avis'),
+          maxLines: 4,
+        ),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, null), child: Text('Annuler')),
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, controller.text),
+              child: Text('Envoyer')),
+        ],
+      ),
+    );
+    if (result != null && result.trim().isNotEmpty && rapportId != null) {
+      final success = await RapportService()
+          .envoyerCommentaireAuMinistere(rapportId, result.trim());
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(success
+              ? 'Avis envoyé au ministère'
+              : 'Échec de l\'envoi de l\'avis'),
+        ),
+      );
+    }
   }
 
   @override
@@ -84,9 +127,9 @@ class _DashboardInspectionState extends State<DashboardInspection> {
                           children: [
                             CircleAvatar(
                               radius: 30,
-                              backgroundColor: Colors.teal[600],
-                              child: const Icon(Icons.verified_user,
-                                  size: 30, color: Colors.white),
+                              backgroundColor: Colors.teal[700],
+                              child: const Icon(Icons.person,
+                                  size: 40, color: Colors.white),
                             ),
                             const SizedBox(width: 16),
                             Expanded(
@@ -94,19 +137,32 @@ class _DashboardInspectionState extends State<DashboardInspection> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Bonjour, $nomComplet',
+                                    'Bienvenue, $nomComplet',
                                     style: const TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold,
+                                      color: Colors.teal,
                                     ),
                                   ),
                                   const SizedBox(height: 4),
-                                  Text(
-                                    'Inspecteur Académique',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.grey[600],
-                                    ),
+                                  FutureBuilder<String>(
+                                    future: _api.getRoleUtilisateur(),
+                                    builder: (context, roleSnap) {
+                                      if (roleSnap.connectionState !=
+                                          ConnectionState.done) {
+                                        return const Text(
+                                            'Chargement du rôle...');
+                                      }
+                                      final role =
+                                          roleSnap.data ?? 'Inspecteur';
+                                      return Text(
+                                        'Rôle: $role',
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.black54,
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ],
                               ),
@@ -154,12 +210,98 @@ class _DashboardInspectionState extends State<DashboardInspection> {
                             ),
                           ),
                         ),
-                        _buildActionCard(
-                          'Rapports d\'analyse',
-                          Icons.analytics,
-                          Colors.teal,
-                          () =>
-                              Navigator.pushNamed(context, RoutesApp.rapports),
+                        // Bloc rapports d'analyse
+                        Card(
+                          elevation: 3,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Column(
+                              children: [
+                                const Text(
+                                  'Rapports d\'analyse',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: FutureBuilder<List<RapportAnalyseModele>>(
+                                    future: RapportService().lister(),
+                                    builder: (context, snap) {
+                                      if (snap.connectionState != ConnectionState.done) {
+                                        return Center(child: CircularProgressIndicator());
+                                      }
+                                      final rapports = snap.data ?? [];
+                                      if (rapports.isEmpty) {
+                                        return Text('Aucun rapport disponible.');
+                                      }
+                                      return ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: rapports.length,
+                                        itemBuilder: (context, idx) {
+                                          final rapport = rapports[idx];
+                                          return Card(
+                                            child: ListTile(
+                                              title: Text(rapport.titre),
+                                              subtitle: Text(
+                                                rapport.contenu.length > 60
+                                                    ? rapport.contenu.substring(0, 60) + '...'
+                                                    : rapport.contenu,
+                                              ),
+                                              onTap: () {
+                                                showModalBottomSheet(
+                                                  context: context,
+                                                  isScrollControlled: true,
+                                                  builder: (ctx) => Padding(
+                                                    padding: const EdgeInsets.all(24),
+                                                    child: Column(
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          rapport.titre,
+                                                          style: TextStyle(
+                                                              fontSize: 20,
+                                                              fontWeight: FontWeight.bold),
+                                                        ),
+                                                        SizedBox(height: 12),
+                                                        Text(rapport.contenu),
+                                                        SizedBox(height: 24),
+                                                        Row(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          children: [
+                                                            ElevatedButton.icon(
+                                                              icon: Icon(Icons.send),
+                                                              label: Text('Partager au ministère'),
+                                                              onPressed: () {
+                                                                Navigator.pop(ctx);
+                                                                _showCommentDialog(context, rapport.id);
+                                                              },
+                                                            ),
+                                                            SizedBox(width: 24),
+                                                            OutlinedButton(
+                                                              child: Text('Ne pas partager'),
+                                                              onPressed: () => Navigator.pop(ctx),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                                // Charger les commentaires pour ce rapport
+                                                _chargerCommentaires(rapport.id);
+                                              },
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         _buildActionCard(
                           'Décisions publiées',
@@ -221,13 +363,12 @@ class _DashboardInspectionState extends State<DashboardInspection> {
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: _buildStatCard(
-                            'Questionnaires',
-                            nbQuest,
-                            Icons.assignment,
-                            Colors.blue,
-                          ),
-                        ),
+                            child: _buildStatCard(
+                          'Questionnaires',
+                          nbQuest,
+                          Icons.assignment,
+                          Colors.blue,
+                        )),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -253,7 +394,39 @@ class _DashboardInspectionState extends State<DashboardInspection> {
                       ],
                     ),
                     const SizedBox(height: 24),
-                    // Bloc analyse des réponses supprimé ici : voir l'écran dédié AnalyseReponsesInspectionScreen
+                    // Section des avis reçus des établissements
+                    const Text(
+                      'Avis reçus des établissements',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    FutureBuilder<List<Map<String, dynamic>>>(
+                      future: _commentairesFuture,
+                      builder: (context, snap) {
+                        if (snap.connectionState != ConnectionState.done) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                        final commentaires = snap.data ?? [];
+                        if (commentaires.isEmpty) {
+                          return const Text('Aucun avis reçu pour ce rapport.');
+                        }
+                        return Column(
+                          children: commentaires
+                              .map((c) => Card(
+                                    child: ListTile(
+                                      title: Text(c['commentaire'] ?? ''),
+                                      subtitle: Text(
+                                          'Établissement: ${c['etablissementNom'] ?? ''}'),
+                                    ),
+                                  ))
+                              .toList(),
+                        );
+                      },
+                    ),
                   ],
                 ),
               );

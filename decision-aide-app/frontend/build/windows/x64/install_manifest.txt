@@ -1,0 +1,13 @@
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/data/icudtl.dat
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/flutter_windows.dll
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/flutter_secure_storage_windows_plugin.dll
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.bin
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.bin.json
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.json
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/data/flutter_assets/FontManifest.json
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/data/flutter_assets/kernel_blob.bin
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/data/flutter_assets/NativeAssetsManifest.json
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/data/flutter_assets/NOTICES
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/data/flutter_assets/NOTICES.Z
+C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/runner/Debug/data/flutter_assets/shaders/ink_sparkle.frag

@@ -11,6 +11,7 @@ dependencies:
   provider: ^6.1.2
   shared_preferences: ^2.2.3
   file_picker: ^8.0.0+1
+  fl_chart: ^1.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

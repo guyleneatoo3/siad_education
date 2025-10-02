@@ -1,0 +1,28 @@
+^C:\USERS\NGAGO\DESKTOP\SIADEDU\DECISION-AIDE-APP\FRONTEND\BUILD\WINDOWS\X64\CMAKEFILES\AB909F9EB52E5787F78F7D6F6EFB9F8A\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=E:\flutter_windows_3.32.6-stable\flutter PROJECT_DIR=C:\Users\ngago\Desktop\siadedu\decision-aide-app\frontend FLUTTER_ROOT=E:\flutter_windows_3.32.6-stable\flutter FLUTTER_EPHEMERAL_DIR=C:\Users\ngago\Desktop\siadedu\decision-aide-app\frontend\windows\flutter\ephemeral PROJECT_DIR=C:\Users\ngago\Desktop\siadedu\decision-aide-app\frontend FLUTTER_TARGET=C:\Users\ngago\Desktop\siadedu\decision-aide-app\frontend\lib\main.dart DART_DEFINES=RkxVVFRFUl9WRVJTSU9OPTMuMzUuMg==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049MDVkYjk2ODkwOA==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049YThiZmRmYzM5NA==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My45LjA= DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=C:\Users\ngago\Desktop\siadedu\decision-aide-app\frontend\.dart_tool\package_config.json E:/flutter_windows_3.32.6-stable/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\NGAGO\DESKTOP\SIADEDU\DECISION-AIDE-APP\FRONTEND\BUILD\WINDOWS\X64\CMAKEFILES\C287D8CFFE2E196E68653D4C02EAEB22\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\NGAGO\DESKTOP\SIADEDU\DECISION-AIDE-APP\FRONTEND\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/windows -BC:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64 --check-stamp-file C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

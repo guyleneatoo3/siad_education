@@ -1,0 +1,10 @@
+^C:\USERS\NGAGO\DESKTOP\SIADEDU\DECISION-AIDE-APP\FRONTEND\BUILD\WINDOWS\X64\CMAKEFILES\5819AD816812FAAB902A4F15495A3798\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/windows -BC:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64 --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/ngago/Desktop/siadedu/decision-aide-app/frontend/build/windows/x64/decision_aide_frontend.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

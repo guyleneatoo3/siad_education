@@ -19,6 +19,39 @@ import java.util.Optional;
 @RequestMapping("/api/inspection")
 public class ControleurInspection {
     /**
+     * Modifier la date de validité d'un questionnaire
+     */
+    @PatchMapping("/questionnaires/{id}/date-validite")
+    @PreAuthorize("hasRole('INSPECTION')")
+    public ResponseEntity<?> modifierDateValiditeQuestionnaire(@PathVariable Long id, @RequestParam String dateFinPartage) {
+        Optional<Questionnaire> questionnaireOpt = depotQuestionnaire.findById(id);
+        if (questionnaireOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Questionnaire questionnaire = questionnaireOpt.get();
+        try {
+            questionnaire.setDateFinPartage(java.time.Instant.parse(dateFinPartage));
+            depotQuestionnaire.save(questionnaire);
+            return ResponseEntity.ok(Map.of("message", "Date de validité modifiée avec succès"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("erreur", "Format de date invalide. Utilisez l'ISO-8601."));
+        }
+    }
+
+    /**
+     * Supprimer un questionnaire
+     */
+    @DeleteMapping("/questionnaires/{id}")
+    @PreAuthorize("hasRole('INSPECTION')")
+    public ResponseEntity<?> supprimerQuestionnaire(@PathVariable Long id) {
+        Optional<Questionnaire> questionnaireOpt = depotQuestionnaire.findById(id);
+        if (questionnaireOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        depotQuestionnaire.deleteById(id);
+        return ResponseEntity.ok(Map.of("message", "Questionnaire supprimé avec succès"));
+    }
+    /**
      * Statistiques globales pour le dashboard inspection
      */
     @GetMapping("/stats-dashboard")
@@ -36,6 +69,45 @@ public class ControleurInspection {
         );
         return ResponseEntity.ok(stats);
     }
+
+        /**
+         * Statistiques d'occurrence des réponses par question pour un questionnaire
+         */
+        @GetMapping("/stats-reponses/{questionnaireId}")
+        @PreAuthorize("hasRole('INSPECTION')")
+        public ResponseEntity<?> statistiquesReponsesParQuestion(@PathVariable Long questionnaireId) {
+            Optional<Questionnaire> questionnaireOpt = depotQuestionnaire.findById(questionnaireId);
+            if (questionnaireOpt.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            Questionnaire questionnaire = questionnaireOpt.get();
+            List<ReponseQuestionnaire> reponses = depotReponse.findByQuestionnaire(questionnaire);
+            if (reponses.isEmpty()) {
+                return ResponseEntity.ok(Map.of("stats", List.of()));
+            }
+
+            // On suppose que chaque contenuJson est un objet JSON: { "questionId": "reponse", ... }
+            // On va compter les occurrences de chaque réponse pour chaque question
+            Map<String, Map<String, Integer>> stats = new java.util.HashMap<>();
+            for (ReponseQuestionnaire reponse : reponses) {
+                try {
+                    com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+                    Map<String, Object> contenu = mapper.readValue(reponse.getContenuJson(), Map.class);
+                    System.out.println("Réponse JSON parsée: " + contenu);
+                    for (Map.Entry<String, Object> entry : contenu.entrySet()) {
+                        String questionId = entry.getKey();
+                        String reponseValue = String.valueOf(entry.getValue());
+                        stats.putIfAbsent(questionId, new java.util.HashMap<>());
+                        Map<String, Integer> occurences = stats.get(questionId);
+                        occurences.put(reponseValue, occurences.getOrDefault(reponseValue, 0) + 1);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Erreur parsing réponse: " + reponse.getContenuJson());
+                    e.printStackTrace();
+                }
+            }
+            return ResponseEntity.ok(Map.of("stats", stats));
+        }
 
     private final ServiceMistral serviceMistral;
     private final DepotQuestionnaire depotQuestionnaire;
@@ -111,6 +183,8 @@ public class ControleurInspection {
             return ResponseEntity.badRequest().body(Map.of("erreur", "Aucune réponse trouvée pour ce questionnaire"));
         }
 
+    System.out.println("Analyser réponses pour questionnaire ID: " + questionnaireId + ", type: " + typeQuestionnaire);
+
         // Combiner toutes les réponses en JSON
         StringBuilder toutesReponses = new StringBuilder();
         for (ReponseQuestionnaire reponse : reponses) {
@@ -122,6 +196,8 @@ public class ControleurInspection {
         if (analyse == null) {
             return ResponseEntity.badRequest().body(Map.of("erreur", "Erreur lors de l'analyse des réponses"));
         }
+
+   // System.out.println("Analyse générée: " + analyse);
 
         return ResponseEntity.ok(Map.of("analyse", analyse));
     }

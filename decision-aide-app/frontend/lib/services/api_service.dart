@@ -5,6 +5,44 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
+  /// Récupère les statistiques d'occurrence des réponses par question pour un questionnaire
+  Future<Map<String, dynamic>> getStatsReponsesQuestionnaire(
+      int questionnaireId) async {
+    final res = await get('/api/inspection/stats-reponses/$questionnaireId');
+    if (res.statusCode == 200) {
+      return jsonDecode(res.body) as Map<String, dynamic>;
+    }
+    throw Exception(
+        'Erreur lors de la récupération des statistiques de réponses');
+  }
+
+  // CRUD Utilisateurs
+  Future<List<dynamic>> getUsers() async {
+    final res = await get('/api/utilisateurs');
+    if (res.statusCode == 200) {
+      final body = jsonDecode(res.body);
+      if (body is List) return body;
+      if (body is Map && body['users'] is List) return body['users'];
+      return [];
+    }
+    return [];
+  }
+
+  Future<bool> deleteUser(dynamic id) async {
+    final res = await delete('/api/utilisateurs/$id');
+    return res.statusCode == 200;
+  }
+
+  Future<bool> createUser(Map<String, dynamic> data) async {
+    final res = await post('/api/utilisateurs', data);
+    return res.statusCode == 201 || res.statusCode == 200;
+  }
+
+  Future<bool> updateUser(dynamic id, Map<String, dynamic> data) async {
+    final res = await put('/api/utilisateurs/$id', data);
+    return res.statusCode == 200;
+  }
+
   /// Récupère l'analyse des réponses pour le dashboard inspection
   Future<Map<String, dynamic>> getAnalyseReponsesInspection(
       int questionnaireId, String typeQuestionnaire) async {
@@ -13,6 +51,7 @@ class ApiService {
       {}, // body vide
     );
     if (res.statusCode == 200) {
+      /// print("reponse api service " + res.body);
       return jsonDecode(res.body) as Map<String, dynamic>;
     }
     throw Exception(
@@ -143,5 +182,25 @@ class ApiService {
       },
       body: jsonEncode(data),
     );
+  }
+
+  /// Modifie la date de validité d'un questionnaire
+  Future<bool> modifierDateValiditeQuestionnaire(
+      int id, DateTime dateFinPartage) async {
+    final res = await patch(
+      '/api/inspection/questionnaires/$id/date-validite?dateFinPartage=${dateFinPartage.toIso8601String()}',
+      {},
+    );
+    return res.statusCode == 200;
+  }
+
+  /// Supprime un questionnaire
+  Future<bool> supprimerQuestionnaire(int id) async {
+    final res = await delete('/api/inspection/questionnaires/$id');
+    return res.statusCode == 200;
+  }
+
+  Future<String> getRoleUtilisateur() async {
+    throw UnimplementedError('getRoleUtilisateur() has not been implemented.');
   }
 }

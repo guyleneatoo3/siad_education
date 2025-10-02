@@ -108,4 +108,39 @@ public class ControleurUtilisateur { // Début de la classe
         boolean existe = depotUtilisateur.findByEmail(email).isPresent();
         return Map.of("existe", existe);
     }
-} 
+
+    /**
+     * Met à jour un utilisateur existant.
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUtilisateur(@PathVariable Long id, @RequestBody Utilisateur userUpdate) {
+        Optional<Utilisateur> optUser = depotUtilisateur.findById(id);
+        if (optUser.isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("message", "Utilisateur introuvable"));
+        }
+        Utilisateur user = optUser.get();
+        // Mise à jour des champs principaux
+        if (userUpdate.getNomComplet() != null) user.setNomComplet(userUpdate.getNomComplet());
+        if (userUpdate.getEmail() != null) user.setEmail(userUpdate.getEmail());
+        if (userUpdate.getRole() != null) user.setRole(userUpdate.getRole());
+        if (userUpdate.getEtablissement() != null) user.setEtablissement(userUpdate.getEtablissement());
+        // Mise à jour du mot de passe si fourni
+        if (userUpdate.getMotDePasse() != null && !userUpdate.getMotDePasse().isBlank()) {
+            user.setMotDePasse(passwordEncoder.encode(userUpdate.getMotDePasse()));
+        }
+        depotUtilisateur.save(user);
+        return ResponseEntity.ok(Map.of("message", "Utilisateur modifié"));
+    }
+
+    /**
+     * Supprime un utilisateur existant.
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUtilisateur(@PathVariable Long id) {
+        if (!depotUtilisateur.existsById(id)) {
+            return ResponseEntity.badRequest().body(Map.of("message", "Utilisateur introuvable"));
+        }
+        depotUtilisateur.deleteById(id);
+        return ResponseEntity.ok(Map.of("message", "Utilisateur supprimé"));
+    }
+}

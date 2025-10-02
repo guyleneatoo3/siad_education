@@ -18,7 +18,7 @@ public class ConfigurationDemarrage {
         return args -> {
             if (depotUtilisateur.count() == 0) {
                 Etablissement etab = new Etablissement();
-                etab.setNom("Lycée Exemple");
+                etab.setNom("Lycée de MVENGUE");
                 etab.setEmail("contact@lycee-exemple.sn");
                 etab.setVille("Dakar");
                 etab.setRegion("Dakar");
